@@ -10,7 +10,11 @@ function isLoggedIn(req, res, next) {
 
 }
 module.exports = function (app, db, passport) {
+<<<<<<< HEAD
     // normal routes ===============================================================
+=======
+// temporary routes ===============================================================
+>>>>>>> master
 
     // show the home page (will also have our login links)
     app.get('/', (req, res) => {
@@ -27,7 +31,7 @@ module.exports = function (app, db, passport) {
         req.logout();
         res.redirect('/');
     });
-
+// temporary routes ===============================================================
     //====================================================
 
     app.post("/api/twitter", (req, res) => {
@@ -75,18 +79,6 @@ module.exports = function (app, db, passport) {
     });
 
 
-
-    app.post("/api/twitter/clients/new", (req, res) => {
-        // when a user submits a new bot
-        console.log(db);
-
-        db.Liri.create(req.body)
-            .then(data => {
-                console.log(data);
-                res.json("done!")
-            })
-            .catch(err => console.log(err));
-    });
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
