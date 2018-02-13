@@ -95,8 +95,12 @@ module.exports = function (app, db, passport) {
 <<<<<<< HEAD
 =======
                 // let client = new Liri(data);
+<<<<<<< HEAD
                 let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, 'cat_retweets');
 >>>>>>> master
+=======
+                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
+>>>>>>> shama
                 client.init();
                 console.log(client);
 
