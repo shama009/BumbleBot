@@ -34,11 +34,11 @@ module.exports = function (app, db, passport) {
     app.get("/api/twitter/:id/:method/:input", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
-            id: req.params.id
+            _id: req.params.id
         })
             .then(data => {
                 // let client = new Liri(data);
-                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
+                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token, data.twitter.tokenSecret, data.twitter.username);
                 client.init();
                 console.log(client);
 
