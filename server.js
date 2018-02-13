@@ -1,6 +1,6 @@
 const express      = require("express");
 const path         = require("path");
-const morgan       = require("morgan");
+const logger       = require("morgan");
 const mongoose     = require("mongoose");
 const bp           = require('body-parser');
 const passport     = require('passport');
