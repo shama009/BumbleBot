@@ -37,16 +37,25 @@ module.exports = function (app, db, passport) {
             id: req.params.id
         })
             .then(data => {
+                console.log(data.twitter.access_token_key);
+                
+                let client = new Liri(
+                    auth.twitterAuth.consumerKey,
+                    auth.twitterAuth.consumerSecret,
+                    data.twitter.token,
+                    data.twitter.tokenSecret,
+                    data.screenName
+                );
 
                 // let client = new Liri(data);
-                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
+                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, 'cat_retweets');
                 client.init();
                 console.log(client);
 
                 switch (req.params.method) {
 
                     case "get":
-                        client.get(req.params.input);
+                        setInterval(() => client.get(req.params.input), req.params.frequency);
                         break;
 
                     case "post":
@@ -64,7 +73,7 @@ module.exports = function (app, db, passport) {
 
                 res.json(client);
             })
-            .catch(err => res.send("PROBLEM"));
+            .catch(err => res.json(err));
     });
 
 
