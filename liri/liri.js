@@ -43,7 +43,7 @@ module.exports = class liri {
 
 
     // search twitter
-    get(search) {
+    get(search, callback) {
 
         if (search) {
 
@@ -58,6 +58,15 @@ module.exports = class liri {
                 for (let i = 0; i < tweets.statuses.length; i++) {
 
                     console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+
+                    let response = {
+                        screen_name: this.screenName,
+                        text: tweets.statuses[i].text
+                    };
+
+                    console.log(response);
+
+                    callback(response);
                 }
             });
 
@@ -143,7 +152,7 @@ module.exports = class liri {
 
     }
 
-    fav(search) {
+    fav(search, callback) {
 
         this.client.get("search/tweets", {
             q: search,
@@ -159,7 +168,15 @@ module.exports = class liri {
                         console.log(err);
                         return;
                     } else {
-                        console.log("tweet: " + tweetext + " favorited")
+                        console.log("tweet: " + tweetext + " favorited");
+
+                        let response = {
+                            text: tweets.statuses[0].text
+                        };
+
+                        console.log(response);
+
+                        callback(response);
                     }
                 })
 
