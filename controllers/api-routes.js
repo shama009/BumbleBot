@@ -10,6 +10,19 @@ function isLoggedIn(req, res, next) {
 }
 module.exports = function (app, db, passport) {
 // temporary routes ===============================================================
+    app.post("/api/user", (req, res) => {
+        db.User
+            .create(req.body)
+            .then(userData => res.json(userData))
+            .catch(err => res.status(422).json(err));
+    });
+
+    app.get("/api/users", (req, res) => {
+        db.User
+            .find()
+            .then(userData => res.json(userData))
+            .catch(err => res.status(422).json(err));
+    })
 
     // show the home page (will also have our login links)
     app.get('/', (req, res) =>{
@@ -98,4 +111,5 @@ module.exports = function (app, db, passport) {
            //res.json(user.twitter.token);
         });
     });
+
 }

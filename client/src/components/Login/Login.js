@@ -19,10 +19,17 @@ class Login extends Component {
         localStorage.setItem("password", this.state.password);
         API.getUsers()
         .then(data => {
-            console.log(data);
+            for(let i = 0; i < data.data.length; i++) {
+                if(this.state.username === data.data[i].username && this.state.password === data.data[i].password) {
+                    this.setState({ username: "", password: "" });
+                    window.location = "/home";
+                }
+                else {
+                    alert("username or password incorrect");
+                }
+            }
         })
-        this.setState({ username: "", password: "" });
-        window.location = "/home";
+        
     };
 
     loginHandler(e) {
