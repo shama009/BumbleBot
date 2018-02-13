@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 import "./Register.css";
 
 class Register extends Component {
@@ -18,12 +19,26 @@ class Register extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
-        this.setState({
-            username:"",
-            password:"",
-            passwordReEnter:""
-        })
+        if (this.state.password === this.state.passwordReEnter) {
+            localStorage.setItem("username", this.state.username);
+            localStorage.setItem("password", this.state.password);
+            API.saveUser({
+                username: this.state.username,
+                password: this.state.password
+            })
+            .then(res => window.location = "/home")
+            .catch(err => console.log(err));
+            this.setState({
+                username:"",
+                password:"",
+                passwordReEnter:""
+            });
+            window.location = "/home";
+        }
+        else {
+            alert("Password's don't match!");
+        }
+        
     }
 
     render() {
@@ -38,7 +53,6 @@ class Register extends Component {
                                     <form className="col s12">
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="username">Username</label>
                                             <input 
                                                 placeholder="username" 
                                                 id="username" 
@@ -47,11 +61,11 @@ class Register extends Component {
                                                 value={this.state.username}
                                                 name="username"
                                                 onChange={this.handleInputChange} />
+                                            <label htmlFor="username">Username</label>
                                         </div>
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="password">Password</label>
                                             <input 
                                                 placeholder="password"
                                                 id="password"
@@ -60,11 +74,11 @@ class Register extends Component {
                                                 value={this.state.password}
                                                 name="password"
                                                 onChange={this.handleInputChange} />
+                                            <label htmlFor="password">Password</label>
                                         </div>
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                             <input
                                                 placeholder="-"
                                                 id="reEnterPwd"
@@ -73,6 +87,7 @@ class Register extends Component {
                                                 name="passwordReEnter"
                                                 value={this.state.passwordReEnter}
                                                 onChange={this.handleInputChange} />
+                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                         </div>
                                         </div>
                                     </form>
