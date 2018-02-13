@@ -1,17 +1,4 @@
-// var Twitter = require('twitter');
-// require("dotenv").config();
-// console.log(process.env.access_token_key);
-
-
-// call modules
-// var keys = require("./keys.js");
 var Twitter = require('twitter');
-// var Spotify = require("node-spotify-api");
-var fs = require("fs");
-var request = require("request");
-// var moment = require('moment');
-
-
 
 module.exports = class liri {
 
@@ -138,23 +125,23 @@ module.exports = class liri {
 
     }
 
-    // followListen() {
-    //     var stream = this.client.stream('user');
-    //     stream.on('follow', followed);
+    followListen() {
+        var stream = this.client.stream('user');
+        stream.on('follow', followed);
 
-    //     function followed(event) {
-    //         var name = event.source.screen_name;
-    //         if (name != liri.twitter.screenName) {
-    //             console.log(name + " followed!");
-    //             liri.twitter.post("@" + name + " Thanks for following!");
-    //             liri.twitter.add(name);
-    //         } else {
-    //             console.log("done");
-    //             return
-    //         }
-    //     }
+        function followed(event) {
+            var name = event.source.screen_name;
+            if (name != liri.twitter.screenName) {
+                console.log(name + " followed!");
+                liri.twitter.post("@" + name + " Thanks for following!");
+                liri.twitter.add(name);
+            } else {
+                console.log("done");
+                return
+            }
+        }
 
-    // }
+    }
 
     fav(search) {
 
