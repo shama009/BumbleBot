@@ -63,9 +63,10 @@ module.exports = class liri {
             this.client.get('search/tweets', {
                 q: search,
                 count: 1
-            }, function (error, tweets, response) {
+            }, (error, tweets, response) => {
 
                 console.log("TWEET HISTORY (NEWEST TO OLDEST)");
+                console.log(`FROM ${this.screenName}`);
 
                 for (let i = 0; i < tweets.statuses.length; i++) {
 

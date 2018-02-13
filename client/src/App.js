@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import API from "./utils/API";
 
 class App extends Component {
   render() {
@@ -13,6 +14,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <button onClick={() => {API.search("api/twitter/big_cat_retweets/get/cats/1000").then(data => console.log(data))}}>test</button>
       </div>
     );
   }
