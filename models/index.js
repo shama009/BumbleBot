@@ -1,3 +1,4 @@
 module.exports = {
-    Liri: require("./Liri")
+    Liri: require("./Liri"),
+    User: require("./user")
 }
