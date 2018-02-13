@@ -38,14 +38,15 @@ module.exports = function (app, db, passport) {
         })
             .then(data => {
                 // let client = new Liri(data);
-                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token, data.twitter.tokenSecret, data.twitter.username);
+                let client = new Liri(configAuth.twitterAuth.consumerKey, configAuth.twitterAuth.consumerSecret, data.twitter.token, data.twitter.tokenSecret, data.twitter.username);
                 client.init();
                 console.log(client);
 
                 switch (req.params.method) {
 
                     case "get":
-                        setInterval(() => client.get(req.params.input), req.params.frequency);
+                        //setInterval(() => client.get(req.params.input), req.params.frequency);
+                        client.get(req.params.input);
                         break;
 
                     case "post":
