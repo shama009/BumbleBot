@@ -9,7 +9,7 @@ function isLoggedIn(req, res, next) {
     
 }
 module.exports = function (app, db, passport) {
-// normal routes ===============================================================
+// temporary routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', (req, res) =>{
@@ -28,7 +28,7 @@ module.exports = function (app, db, passport) {
         req.logout();
         res.redirect('/');
     });
-
+// temporary routes ===============================================================
     //====================================================
     // make it a post request
     app.get("/api/twitter/:id/:method/:input", (req, res) => {
@@ -37,7 +37,6 @@ module.exports = function (app, db, passport) {
             id: req.params.id
         })
             .then(data => {
-                console.log(data.twitter.access_token_key);
                 // let client = new Liri(data);
                 let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
                 client.init();
