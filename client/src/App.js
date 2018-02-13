@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Register from "./components/Register/Register";
-import Home from "./components/Home/Home";
+import Register from "./components/Register/";
+import Home from "./components/Home/";
+import Login from "./components/Login";
+
 
 class App extends Component {
 
@@ -9,8 +11,10 @@ class App extends Component {
     return (
     <Router>
     <div>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/home" component={Home} />
       <Route exact path="/register" component={Register} />
+      <Route exact path="/" component={Login} />
+
     </div>
     </Router>
     );

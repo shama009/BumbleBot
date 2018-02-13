@@ -1,0 +1,39 @@
+/* 
+        .card .card-content {
+            padding: 24px;
+            border-radius: 0 0 2px 2px;
+            background-color: #e6d54d;
+            margin-top: 100px;
+        }
+        
+
+
+
+.btn, .btn-large {
+            text-decoration: none;
+            color: #fff;
+            background-color: #0e0d0d;
+            text-align: center;
+            letter-spacing: .5px;
+            -webkit-transition: .2s ease-out;
+            transition: .2s ease-out;
+            cursor: pointer;
+        }
+
+        a {
+            color: #de5a08;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .white-text {
+            color: #1f1d1d !important;
+        }
+
+        .btn:hover {
+            background-color: rgb(48, 48, 39);
+        }
+
+        input::placeholder {
+            color: rgb(26, 23, 23);
+        } */
