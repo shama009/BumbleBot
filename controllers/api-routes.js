@@ -1,12 +1,4 @@
 const Liri = require("../liri/liri");
-<<<<<<< HEAD
-const path = require("path");
-const auth = require("../config/auth");
-
-module.exports = function (app, db, passport) {
-
-    app.get('/', (req, res) => {
-=======
 const configAuth = require('../config/auth');
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
@@ -21,58 +13,22 @@ module.exports = function (app, db, passport) {
 
     // show the home page (will also have our login links)
     app.get('/', (req, res) =>{
->>>>>>> master
         res.render('index.ejs');
     });
 
     // PROFILE SECTION =========================
-<<<<<<< HEAD
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.render('profile.ejs', {
-            user: req.user
-=======
     app.get('/profile', isLoggedIn, (req, res)=> {
         res.render('profile.ejs', {
             user : req.user
->>>>>>> master
         });
     });
 
     // LOGOUT ==============================
-<<<<<<< HEAD
-    app.get('/logout', (req, res) => {
-=======
     app.get('/logout', (req, res) =>{
->>>>>>> master
         req.logout();
         res.redirect('/');
     });
 
-<<<<<<< HEAD
-    app.get('/login', function (req, res) {
-        res.render('login.ejs', {
-            message: req.flash('loginMessage')
-        });
-    });
-
-    // send to twitter to do the authentication
-    app.get('/auth/twitter', passport.authenticate('twitter', {
-        scope: 'email'
-    }));
-
-    // handle the callback after twitter has authenticated the user
-    app.get('/auth/twitter/callback',
-        passport.authenticate('twitter', {
-            successRedirect: '/profile',
-            failureRedirect: '/'
-        }));
-
-    app.post("/api/twitter/:method/:input/:frequency", (req, res) => {
-        console.log(`endpont hit`);
-        db.User.findOne({
-                _id: req.body.id
-            })
-=======
     //====================================================
 
     app.get("/api/twitter/:id/:method/:input", (req, res) => {
@@ -80,7 +36,6 @@ module.exports = function (app, db, passport) {
         db.User.findOne({
             id: req.params.id
         })
->>>>>>> master
             .then(data => {
                 console.log(data.twitter.access_token_key);
                 
@@ -92,15 +47,8 @@ module.exports = function (app, db, passport) {
                     data.screenName
                 );
 
-<<<<<<< HEAD
-=======
                 // let client = new Liri(data);
-<<<<<<< HEAD
                 let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, 'cat_retweets');
->>>>>>> master
-=======
-                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
->>>>>>> shama
                 client.init();
                 console.log(client);
 
@@ -141,17 +89,6 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => console.log(err));
     });
-<<<<<<< HEAD
-}
-
-// route middleware to ensure user is logged in
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-
-    res.redirect('/');
-}
-=======
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
@@ -183,4 +120,3 @@ function isLoggedIn(req, res, next) {
         });
     });
 }
->>>>>>> master
