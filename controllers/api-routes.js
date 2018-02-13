@@ -30,7 +30,7 @@ module.exports = function (app, db, passport) {
     });
 
     //====================================================
-
+    // make it a post request
     app.get("/api/twitter/:id/:method/:input", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
@@ -67,23 +67,7 @@ module.exports = function (app, db, passport) {
             .catch(err => res.send("PROBLEM"));
     });
 
-    app.get("/testing0", (req, res) => {
-        db.Liri.find()
-            .then(() => res.send("success"))
-            .catch(err => res.send(err));
-    });
 
-    app.post("/api/twitter/clients/new", (req, res) => {
-        // when a user submits a new bot
-        console.log(db);
-
-        db.Liri.create(req.body)
-            .then(data => {
-                console.log(data);
-                res.json("done!")
-            })
-            .catch(err => console.log(err));
-    });
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
