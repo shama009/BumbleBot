@@ -38,17 +38,8 @@ module.exports = function (app, db, passport) {
         })
             .then(data => {
                 console.log(data.twitter.access_token_key);
-                
-                let client = new Liri(
-                    auth.twitterAuth.consumerKey,
-                    auth.twitterAuth.consumerSecret,
-                    data.twitter.token,
-                    data.twitter.tokenSecret,
-                    data.screenName
-                );
-
                 // let client = new Liri(data);
-                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, 'cat_retweets');
+                let client = new Liri(configAuth.consumerKey, configAuth.consumerSecret, data.twitter.token,data.twitter.tokenSecret, data.twitter.username);
                 client.init();
                 console.log(client);
 
