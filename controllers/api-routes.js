@@ -10,11 +10,7 @@ function isLoggedIn(req, res, next) {
 
 }
 module.exports = function (app, db, passport) {
-<<<<<<< HEAD
-    // normal routes ===============================================================
-=======
 // temporary routes ===============================================================
->>>>>>> master
 
     // show the home page (will also have our login links)
     app.get('/', (req, res) => {
