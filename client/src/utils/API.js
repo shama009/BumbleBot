@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASEURL = "https://localhost:3300/";
+const BASEURL = "https://localhost:3301/";
 
 export default {
     search: function(query) {
