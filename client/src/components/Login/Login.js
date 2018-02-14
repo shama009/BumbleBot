@@ -15,18 +15,21 @@ class Login extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        localStorage.setItem("username", this.state.username);
-        localStorage.setItem("password", this.state.password);
-        API.getUsers()
+        API.getUser({
+            username: this.state.username
+        })
         .then(data => {
-            for(let i = 0; i < data.data.length; i++) {
-                if(this.state.username === data.data[i].username && this.state.password === data.data[i].password) {
-                    this.setState({ username: "", password: "" });
-                    window.location = "/home";
-                }
-                else {
-                    alert("username or password incorrect");
-                }
+            console.log(data);
+            if (!data.data) {
+                alert("no username exists, click link to register below");
+            }
+            else if (this.state.password === data.data.password) {
+                localStorage.setItem("username", this.state.username);
+                localStorage.setItem("password", this.state.password);
+                window.location = "/home";
+            }
+            else {
+                alert("Password or Username is incorrect");
             }
         })
         
