@@ -1,5 +1,7 @@
 import "./Login.css";
 import React, { Component } from 'react';
+import API from "../../utils/API";
+
 class Login extends Component {
     state = {
         username: "",
@@ -13,9 +15,26 @@ class Login extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
+        API.getUser({
+            username: this.state.username
+        })
+        .then(data => {
+            console.log(data);
+            if (!data.data) {
+                alert("no username exists, click link to register below");
+            }
+            else if (this.state.password === data.data.password) {
+                localStorage.setItem("username", this.state.username);
+                localStorage.setItem("password", this.state.password);
+                window.location = "/home";
+            }
+            else {
+                alert("Password or Username is incorrect");
+            }
+        })
+        
     };
+
     loginHandler(e) {
         e.preventDefault();
         console.log("clicked");
@@ -43,7 +62,6 @@ class Login extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s12">
-                                        <label htmlFor="password">Password</label>
                                             <input
                                                 placeholder="password"
                                                 id="password"
@@ -52,6 +70,7 @@ class Login extends Component {
                                                 name="password"
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange} />
+                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
