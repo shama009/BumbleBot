@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Tweets from "../Tweets/Tweets";
 import CommandsList from "../CommandsList/CommandsList";
+import "./Home.css";
 
 const Home = props => (
     <div>

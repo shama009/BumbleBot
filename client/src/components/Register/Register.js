@@ -20,20 +20,23 @@ class Register extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.password === this.state.passwordReEnter) {
-            localStorage.setItem("username", this.state.username);
-            localStorage.setItem("password", this.state.password);
-            API.saveUser({
-                username: this.state.username,
-                password: this.state.password
+            API.getUser({username: this.state.username})
+            .then(data => {
+                if(!data.data) {
+                    API.saveUser({
+                        username: this.state.username,
+                        password: this.state.password
+                    })
+                    .then(res => {
+                        window.location = "/home";
+                    })
+                    .catch(err => console.log(err));
+                }
+                else {
+                    alert("Username already exists");
+                    return;
+                }
             })
-            .then(res => window.location = "/home")
-            .catch(err => console.log(err));
-            this.setState({
-                username:"",
-                password:"",
-                passwordReEnter:""
-            });
-            window.location = "/home";
         }
         else {
             alert("Password's don't match!");

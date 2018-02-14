@@ -3,19 +3,21 @@ var mongoose = require('mongoose');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    username: {
+    username         : {
         type: String,
+        required: true,
         unique: true
     },
-    password: {
+    password         : {
         type: String,
+        required: true
     },
-    twitter: {
-        id: String,
-        token: String,
-        tokenSecret: String,
-        displayName: String,
-        username: String
+    twitter          : {
+        id           : String,
+        token        : String,
+        tokenSecret  : String,
+        displayName  : String,
+        username     : String
     }
 
 });
