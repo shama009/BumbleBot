@@ -16,18 +16,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(express.static("client"));
-app.set('view engine', 'ejs');
-
-app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', 
-    resave: true,
-    saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session()); 
-app.use(flash()); 
-
 app.use(logger('dev'));
 app.use(cookieParser()); 
 app.use(bp.json());
