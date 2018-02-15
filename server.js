@@ -7,9 +7,11 @@ const passport     = require('passport');
 const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
-
-const PORT = process.env.PORT || 3001;
 const app = express();
+const cors = require('cors');
+app.use(cors());
+const PORT = process.env.PORT || 3001;
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -21,7 +23,7 @@ app.use(cookieParser());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+//app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
