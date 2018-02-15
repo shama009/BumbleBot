@@ -20,12 +20,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(express.static("client/build"));
 
-app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', 
-    resave: true,
-    saveUninitialized: true
-}));
-
 app.use(passport.initialize());
 app.use(passport.session()); 
 app.use(flash()); 
@@ -41,9 +35,11 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
 mongoose.connect("mongodb://localhost/liri");
 require('./config/passport')(passport);
 const db = require("./models");

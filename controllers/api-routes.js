@@ -59,6 +59,8 @@ module.exports = function (app, db, passport) {
             })
             .then(data => {
 
+                console.log(data);
+
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
                     configAuth.twitterAuth.consumerSecret,
@@ -84,6 +86,11 @@ module.exports = function (app, db, passport) {
 
                     case "fav":
                         client.fav(req.body.input, data => res.json(data));
+                        break;
+
+                    case "follow-listen":
+                        client.followListen(message => console.log(message));
+                        res.send("Listening for follows");
                         break;
 
                     default:
