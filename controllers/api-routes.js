@@ -39,10 +39,10 @@ module.exports = function (app, db, passport) {
     //     res.sendFile(path.join(__dirname, '../views/test.html'));
     // });
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/profile.html'));
-    });
+    // // PROFILE SECTION =========================
+    // app.get('/profile', isLoggedIn, (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/profile.html'));
+    // });
 
     // LOGOUT ==============================
     app.get('/logout', (req, res) => {

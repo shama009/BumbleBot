@@ -10,6 +10,6 @@ export default {
     },
 
     get: () => {
-      return axios.get("/auth/twitter")
+      return axios.get()
     }
 }

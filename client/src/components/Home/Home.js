@@ -7,13 +7,13 @@ import "./Home.css";
 const Home = props => (
     
     <div>
-    <Navbar />
-    <div className="container">
-        <div className="row">
-            <Tweets />
-            <CommandsList />
+        <Navbar />
+        <div className="container">
+            <div className="row">
+                <Tweets />
+                <CommandsList />
+            </div>
         </div>
-    </div>
     </div>
 )
 

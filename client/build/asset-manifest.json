@@ -1,7 +1,13 @@
 {
   "main.css": "static/css/main.baba96ca.css",
   "main.css.map": "static/css/main.baba96ca.css.map",
+<<<<<<< HEAD
   "main.js": "static/js/main.c93b27b1.js",
   "main.js.map": "static/js/main.c93b27b1.js.map",
   "static\\media\\bee.svg": "static/media/bee.9e157571.svg"
+=======
+  "main.js": "static/js/main.a03ae814.js",
+  "main.js.map": "static/js/main.a03ae814.js.map",
+  "static/media/bee.svg": "static/media/bee.9e157571.svg"
+>>>>>>> master
 }
