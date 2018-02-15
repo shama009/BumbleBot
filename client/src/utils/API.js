@@ -7,5 +7,9 @@ export default {
 
     saveUser: (userData) => {
         return axios.post("/api/user", userData);
+    },
+
+    get: () => {
+      return axios.get("/auth/twitter")
     }
 }

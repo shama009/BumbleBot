@@ -35,9 +35,9 @@ module.exports = function (app, db, passport) {
     })
 
     // show the home page (will also have our login links)
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/test.html'));
-    });
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/test.html'));
+    // });
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, (req, res) => {
@@ -55,7 +55,7 @@ module.exports = function (app, db, passport) {
     app.post("/api/twitter", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
-                _id: req.body.id
+                "twitter.id": req.body.id
             })
             .then(data => {
 
@@ -76,7 +76,7 @@ module.exports = function (app, db, passport) {
                 switch (req.body.method) {
 
                     case "get":
-                        // setInterval(() => client.get(req.params.input), 5000);
+                        setInterval(() => client.get(req.params.input), 5000);
                         client.get(req.body.input, data => res.json(data));
                         break;
 
@@ -102,8 +102,7 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => res.json(err));
     });
-
-
+    
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
@@ -114,7 +113,7 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect: '/profile',
+            successRedirect: '/home',
             failureRedirect: '/'
         }));
     // send to twitter to do the authentication
@@ -138,6 +137,8 @@ module.exports = function (app, db, passport) {
             //res.json(user.twitter.token);
         });
     });
+
+    app.get("/test", (req, res) => res.send("test"));
 
 }
 
