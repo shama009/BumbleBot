@@ -1,11 +1,22 @@
-body {
-    background-image: url("https://www.xmple.com/wallpaper/white-beehive-hexagon-yellow-honeycomb-1920x1080-c2-ffd700-f0f8ff-l2-14-181-a-45-f-5.svg");
-}
+/* body {
+    background-image: url("../../honeycomb.jpg");
+} */
 
 #register-card {
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
-.card-content {
-    background-color: rgb(31, 28, 28);
+.card-content white-text {
+    background-color: rgb(234, 233, 107);
+}
+
+btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #1b1d1d;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: .2s ease-out;
+    transition: .2s ease-out;
+    cursor: pointer;
 }

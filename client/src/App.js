@@ -3,19 +3,20 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from "./components/Register/";
 import Home from "./components/Home/";
 import Login from "./components/Login";
-
+import CreateCommands from "./components/CreateCommands"
 
 class App extends Component {
 
   render() {
     return (
-    <Router>
-    <div>
-      <Route exact path="/" component={Login} />  
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/register" component={Register} />   
-    </div>
-    </Router>
+      <Router>
+        <div>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/create" component={CreateCommands} />
+        </div>
+      </Router>
     );
   }
 }

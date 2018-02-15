@@ -1,0 +1,48 @@
+
+#follow-tweet {
+    border: 1px solid gold;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 60px;
+    /* margin-left: 35px;  */
+}
+
+
+#post-tweet {
+    border: 1px solid gold;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 60px;
+    /* margin-left: 35px;  */
+}
+
+#re-tweet {
+    border: 1px solid gold;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 35px;
+    /* margin-left: 35px; */
+}
+
+#fave-tweet {
+    border: 1px solid gold;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 35px;
+    /* margin-left: 35px; */
+}
+
+/* .row .col.m5{
+    width: 47.666667%;
+} */
+
+/* #create-command {
+    width: 47.666667%;
+}
+#create-command2 {
+    width: 47.666667%;
+} */
+
+.blue-grey.darken-1 {
+    background-color: black !important;
+}

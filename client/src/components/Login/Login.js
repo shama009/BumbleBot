@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { Component } from 'react';
-// import API from "../utils/API";
+import API from "../../utils/API";
+import Navbar3 from "../Navbar3";
 
 class Login extends Component {
     state = {
@@ -15,16 +16,32 @@ class Login extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-        window.location = "/home";
+        localStorage.setItem("username", this.state.username);
+        localStorage.setItem("password", this.state.password);
+        API.getUsers()
+        .then(data => {
+            for(let i = 0; i < data.data.length; i++) {
+                if(this.state.username === data.data[i].username && this.state.password === data.data[i].password) {
+                    this.setState({ username: "", password: "" });
+                    window.location = "/home";
+                }
+                else {
+                    alert("username or password incorrect");
+                }
+            }
+        })
+        
     };
+
     loginHandler(e) {
         e.preventDefault();
         console.log("clicked");
     }
     render() {
-        return (<div className="container">
+        return (
+        <div>
+            <Navbar3/>
+            <div className="container">
             <div className="row">
                 <div className="col s12 m8 offset-m2">
                     <div className="card blue-grey darken-1" id="login-card">
@@ -46,7 +63,6 @@ class Login extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s12">
-                                        <label htmlFor="password">Password</label>
                                             <input
                                                 placeholder="password"
                                                 id="password"
@@ -55,6 +71,7 @@ class Login extends Component {
                                                 name="password"
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange} />
+                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -72,6 +89,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         );

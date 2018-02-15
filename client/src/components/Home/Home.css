@@ -1,3 +1,14 @@
-/* body {
-    background-image: url("https://www.xmple.com/wallpaper/white-beehive-hexagon-yellow-honeycomb-1920x1080-c2-ffd700-f0f8ff-l2-14-181-a-45-f-5.svg");
-} */
+btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #1b1d1d;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: .2s ease-out;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+.container {
+    width: 80;
+}
