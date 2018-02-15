@@ -35,14 +35,14 @@ module.exports = function (app, db, passport) {
     })
 
     // show the home page (will also have our login links)
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/test.html'));
-    });
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/test.html'));
+    // });
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/profile.html'));
-    });
+    // // PROFILE SECTION =========================
+    // app.get('/profile', isLoggedIn, (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/profile.html'));
+    // });
 
     // LOGOUT ==============================
     app.get('/logout', (req, res) => {
@@ -58,6 +58,8 @@ module.exports = function (app, db, passport) {
                 _id: req.body.id
             })
             .then(data => {
+
+                console.log(data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -86,6 +88,11 @@ module.exports = function (app, db, passport) {
                         client.fav(req.body.input, data => res.json(data));
                         break;
 
+                    case "follow-listen":
+                        client.followListen(message => console.log(message));
+                        res.send("Listening for follows");
+                        break;
+
                     default:
                         res.send("err no method match");
                         break;
@@ -107,7 +114,7 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect: '/profile',
+            successRedirect: '/home',
             failureRedirect: '/'
         }));
     // send to twitter to do the authentication

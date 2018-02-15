@@ -9,7 +9,10 @@ var userSchema = mongoose.Schema({
     },
     password         : {
         type: String,
+<<<<<<< HEAD
         
+=======
+>>>>>>> master
     },
     twitter          : {
         id           : String,
