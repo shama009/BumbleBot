@@ -35,14 +35,14 @@ module.exports = function (app, db, passport) {
     })
 
     // show the home page (will also have our login links)
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/test.html'));
-    });
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/test.html'));
+    // });
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/profile.html'));
-    });
+    // // PROFILE SECTION =========================
+    // app.get('/profile', isLoggedIn, (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/profile.html'));
+    // });
 
     // LOGOUT ==============================
     app.get('/logout', (req, res) => {
@@ -107,7 +107,7 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect: '/profile',
+            successRedirect: '/home',
             failureRedirect: '/'
         }));
     // send to twitter to do the authentication
