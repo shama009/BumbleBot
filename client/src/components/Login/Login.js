@@ -24,8 +24,6 @@ class Login extends Component {
                 alert("no username exists, click link to register below");
             }
             else if (this.state.password === data.data.password) {
-                localStorage.setItem("username", this.state.username);
-                localStorage.setItem("password", this.state.password);
                 window.location = "/home";
             }
             else {

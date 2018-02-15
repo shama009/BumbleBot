@@ -41,7 +41,7 @@ module.exports = function(passport) {
         console.log(token, tokenSecret);
         // asynchronous
         process.nextTick(function() {
-
+            console.log("test");
             // check if the user is already logged in
             if (!req.user) {
 
