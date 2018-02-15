@@ -7,7 +7,7 @@ const passport     = require('passport');
 const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
-const cors = require("cors");
+const cors         = require('cors');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -46,12 +46,10 @@ const db = require("./models");
 
 require('./controllers/api-routes.js')(app, db, passport);
 
-app.get("/app", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("/home", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./views/test.html"));
+// });
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./client/build/index.html")));
 
 app.listen(PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`));
