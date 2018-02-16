@@ -85,6 +85,7 @@ class Register extends Component {
                                             id="registerBtn"
                                             type="submit"
                                             name="action"
+                                            onSubmit={this.props.handleFormSubmit}
                                             >Submit
                                             <i className="material-icons right">send</i>
                                         </button>

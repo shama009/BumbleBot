@@ -57,7 +57,7 @@ class App extends Component {
     return (
     <Router>
       <div>
-        <Route path="/register" render={() => <Register username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange}   />} />
+        <Route path="/register" render={() => <Register username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit}  />} />
         <Route exact path="/home" render={() => <Home username={this.state.username} password={this.state.password} />} />
         <Route exact path="/" render={() => <Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit}  />} />
       </div>
