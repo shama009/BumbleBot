@@ -5,6 +5,7 @@ import CommandsList from "../CommandsList/CommandsList";
 import "./Home.css";
 
 const Home = props => (
+    
     <div>
         <Navbar />
         <div className="container">

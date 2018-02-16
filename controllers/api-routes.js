@@ -42,7 +42,7 @@ module.exports = function (app, db, passport) {
     app.post("/api/twitter", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
-                _id: req.body.id
+                "twitter.id": req.body.id
             })
             .then(data => {
 
@@ -63,7 +63,7 @@ module.exports = function (app, db, passport) {
                 switch (req.body.method) {
 
                     case "get":
-                        // setInterval(() => client.get(req.params.input), 5000);
+                        setInterval(() => client.get(req.params.input), 5000);
                         client.get(req.body.input, data => res.json(data));
                         break;
 
@@ -89,8 +89,7 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => res.json(err));
     });
-
-
+    
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
@@ -104,6 +103,8 @@ module.exports = function (app, db, passport) {
         })(req, res, next)
     }
 );
+
+    app.get("/test", (req, res) => res.send("test"));
 
 }
 
