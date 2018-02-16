@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Register from "./components/Register/Register";
-import Home from "./components/Home/Home";
-import Login from "./components/Login/Login";
-import API from "./utils/API"
+import Register from "./components/Register/";
+import Home from "./components/Home/";
+import Login from "./components/Login";
+import CreateCommands from "./components/CreateCommands"
+import SignupTwitter from "./components/SignUpTwitter/SignUpTwitter";
+import API from "./utils/API";
+
 
 class App extends Component {
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Register.css";
-import "../../utils/API"
+import Navbar3 from "../Navbar3";
+import API from "../../utils/API"
 
 class Register extends Component {
 
@@ -31,7 +32,8 @@ class Register extends Component {
         console.log(Component);
         console.log(this.props);
         return (
-            
+            <div>
+                <Navbar3/>
             <div className="container">
                 <div className="row">
                     <div className="col s12 m12">
@@ -42,7 +44,6 @@ class Register extends Component {
                                     <form className="col s12">
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="username">Username</label>
                                             <input 
                                                 placeholder="username" 
                                                 id="username" 
@@ -55,7 +56,6 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="password">Password</label>
                                             <input 
                                                 placeholder="password"
                                                 id="password"
@@ -68,9 +68,8 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                             <input
-                                                placeholder="-"
+                                                placeholder="Re-enter password"
                                                 id="reEnterPwd"
                                                 type="password"
                                                 className="validate"
@@ -83,6 +82,7 @@ class Register extends Component {
                                     <div className="row">
                                         <button 
                                             className="btn waves-effect waves-light"
+                                            id="registerBtn"
                                             type="submit"
                                             name="action"
                                             >Submit
@@ -95,6 +95,8 @@ class Register extends Component {
                     </div>
                 </div>
             </div>
+            </div>
+            
         )
     }
 }

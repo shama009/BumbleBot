@@ -1,3 +1,18 @@
+btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #1b1d1d;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: .2s ease-out;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+.container {
+    width: 80;
+}
+
 body {
     background-image: url("../../images/bee.svg");
 }
