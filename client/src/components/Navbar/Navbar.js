@@ -24,7 +24,7 @@ class Navbar extends Component {
                     </ul>
 
                     <ul className="right side-nav" id="mobile">
-                        <li><a href="create-command.html">Create Command</a></li>
+                        <li><a onClick={this.test()}>Create Command</a></li>
                         <li><a href="/"
                         onClick={this.logOut}>Log Out</a></li>
                     </ul>

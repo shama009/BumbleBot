@@ -38,8 +38,8 @@ module.exports = function(passport) {
 
     },
     (req, token, tokenSecret, profile, done) =>{
-        console.log("tokens");
-        console.log(token, tokenSecret);
+        // console.log(req.request);
+        // console.log(token, tokenSecret);
         // asynchronous
         process.nextTick(function() {
             
@@ -88,7 +88,7 @@ module.exports = function(passport) {
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                const user                 = req.user; // pull the user out of the session
+                const user               = req.user; // pull the user out of the session
 
                 user.twitter.id          = profile.id;
                 user.twitter.token       = token;

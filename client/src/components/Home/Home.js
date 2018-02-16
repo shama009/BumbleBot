@@ -4,7 +4,7 @@ import Tweets from "../Tweets/Tweets";
 import CommandsList from "../CommandsList/CommandsList";
 import "./Home.css";
 
-const Home = props => (
+const Home = () => (
     
     <div>
         <Navbar />

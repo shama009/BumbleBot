@@ -36,7 +36,7 @@ module.exports = function (app, db, passport) {
         req.logout();
         res.redirect('/');
     });
-// temporary routes ===============================================================
+    // temporary routes ===============================================================
     //====================================================
 
     app.post("/api/twitter", (req, res) => {
@@ -46,7 +46,7 @@ module.exports = function (app, db, passport) {
             })
             .then(data => {
 
-                console.log(data);
+                // console.log("data" + data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -58,7 +58,7 @@ module.exports = function (app, db, passport) {
 
                 client.init();
 
-                console.log(client);
+                // console.log(client);
 
                 switch (req.body.method) {
 
@@ -89,7 +89,7 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => res.json(err));
     });
-    
+
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
@@ -109,3 +109,19 @@ module.exports = function (app, db, passport) {
 }
 
 
+// app.get('/login', function (req, res, next) {
+//     passport.authenticate('local', function (err, user, info) {
+//         if (err) {
+//             return next(err);
+//         }
+//         if (!user) {
+//             return res.redirect('/login');
+//         }
+//         req.logIn(user, function (err) {
+//             if (err) {
+//                 return next(err);
+//             }
+//             return res.redirect('/users/' + user.username);
+//         });
+//     })(req, res, next);
+// });
