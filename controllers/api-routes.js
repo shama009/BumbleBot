@@ -112,7 +112,8 @@ module.exports = function (app, db, passport) {
     app.get('/auth/twitter/callback', (req, res, next) => {
             passport.authenticate('twitter', (err, user, info) => {
                 console.log(user);
-                res.redirect("/home");
+                res.json(user);
+                next();
             })(req, res, next)
         }
     );
