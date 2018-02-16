@@ -9,7 +9,22 @@ export default {
         return axios.post("/api/user", userData);
     },
 
-    test: (data) => {
-      return axios.post("api/twitter", data);
+    get: () => {
+        return axios.get()
+    },
+    postTweet: () => {
+        return axios.get()
+    },
+
+    followTweet: () => {
+        return axios.get()
+    },
+
+    faveTweet: () => {
+        return axios.get()
+    },
+
+    reTweet: () => {
+        return axios.get()
     }
 }
