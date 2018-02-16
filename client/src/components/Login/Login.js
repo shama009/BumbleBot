@@ -5,7 +5,8 @@ import API from "../../utils/API";
 class Login extends Component {
     state = {
         username: "",
-        password: ""
+        password: "",
+        input: ""
     };
 
     handleInputChange = event => {
@@ -13,6 +14,7 @@ class Login extends Component {
         this.setState({
             [name]: value
         });
+        console.log(this.state);
     };
 
     handleFormSubmit = event => {
@@ -39,6 +41,13 @@ class Login extends Component {
         e.preventDefault();
         console.log("clicked");
     }
+
+    test(event) {
+        event.preventDefault();
+        // API.get();
+        API.get().then(response => console.log(response));
+    }
+
     render() {
         return (<div className="container">
             <div className="row">
@@ -51,7 +60,6 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="input-field col s12">
                                             <input
-                                                placeholder="username"
                                                 id="log-in" type="text"
                                                 value={this.state.username}
                                                 className="validate"
@@ -79,6 +87,11 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="col s12">
                                             Not a Member? Register <a href="/register">HERE</a>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col s12">
+                                            TEST? <a href={'/auth/twitter'}>TEST</a>
                                         </div>
                                     </div>
                                 </form>
