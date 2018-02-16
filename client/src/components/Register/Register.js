@@ -28,7 +28,8 @@ class Register extends Component {
                         password: this.state.password
                     })
                     .then(res => {
-                        window.location = "/home";
+                        localStorage.setItem("username", this.state.username);
+                        window.location = "/twitter-sign-up";
                     })
                     .catch(err => console.log(err));
                 }
@@ -40,8 +41,7 @@ class Register extends Component {
         }
         else {
             alert("Password's don't match!");
-        }
-        
+        } 
     }
 
     render() {
@@ -64,7 +64,6 @@ class Register extends Component {
                                                 value={this.state.username}
                                                 name="username"
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="username">Username</label>
                                         </div>
                                         </div>
                                         <div className="row">
@@ -77,7 +76,6 @@ class Register extends Component {
                                                 value={this.state.password}
                                                 name="password"
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="password">Password</label>
                                         </div>
                                         </div>
                                         <div className="row">
@@ -90,13 +88,13 @@ class Register extends Component {
                                                 name="passwordReEnter"
                                                 value={this.state.passwordReEnter}
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                         </div>
                                         </div>
                                     </form>
                                     <div className="row">
                                         <button 
                                             className="btn waves-effect waves-light"
+                                            id="registerBtn"
                                             type="submit"
                                             name="action"
                                             onClick={this.handleFormSubmit}>Submit

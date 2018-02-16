@@ -7,12 +7,14 @@ class Login extends Component {
         username: "",
         password: ""
     };
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     };
+
     handleFormSubmit = event => {
         event.preventDefault();
         API.getUser({
@@ -24,13 +26,13 @@ class Login extends Component {
                 alert("no username exists, click link to register below");
             }
             else if (this.state.password === data.data.password) {
+                localStorage.setItem("username", this.state.username);
                 window.location = "/home";
             }
             else {
                 alert("Password or Username is incorrect");
             }
         })
-        
     };
 
     loginHandler(e) {
@@ -55,7 +57,6 @@ class Login extends Component {
                                                 className="validate"
                                                 name="username"
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="log-in">Username</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -68,7 +69,6 @@ class Login extends Component {
                                                 name="password"
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -91,4 +91,5 @@ class Login extends Component {
         );
     }
 }
+
 export default Login;
