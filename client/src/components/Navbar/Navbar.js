@@ -15,7 +15,7 @@ class Navbar extends Component {
             id: "943715429070942208"
         };
 
-        // API.test(data).then(data => console.log(data));
+        API.test(data).then(data => console.log(data));
     }
 
     render() {

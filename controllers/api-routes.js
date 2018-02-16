@@ -113,7 +113,6 @@ module.exports = function (app, db, passport) {
             passport.authenticate('twitter', (err, user, info) => {
                 console.log(user);
                 res.json(user);
-                next();
             })(req, res, next)
         }
     );
