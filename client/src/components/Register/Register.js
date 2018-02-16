@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Register.css";
+import Navbar3 from "../Navbar3";
 import API from "../../utils/API"
 
 class Register extends Component {
@@ -13,7 +14,7 @@ class Register extends Component {
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
-            [name]:value
+            [name]: value
         });
     };
 
@@ -43,9 +44,10 @@ class Register extends Component {
             alert("Password's don't match!");
         } 
     }
-
     render() {
         return (
+            <div>
+                <Navbar3/>
             <div className="container">
                 <div className="row">
                     <div className="col s12 m12">
@@ -107,6 +109,8 @@ class Register extends Component {
                     </div>
                 </div>
             </div>
+            </div>
+            
         )
     }
 }

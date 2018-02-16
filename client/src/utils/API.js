@@ -10,6 +10,21 @@ export default {
     },
 
     get: () => {
-      return axios.get()
+        return axios.get()
+    },
+    postTweet: () => {
+        return axios.get()
+    },
+
+    followTweet: () => {
+        return axios.get()
+    },
+
+    faveTweet: () => {
+        return axios.get()
+    },
+
+    reTweet: () => {
+        return axios.get()
     }
 }
