@@ -4,31 +4,34 @@ import "../../utils/API"
 
 class Register extends Component {
 
-    state = {
-        username: "",
-        password: "",
-        passwordReEnter: ""
-    };
+    // state = {
+    //     username: "",
+    //     password: "",
+    //     passwordReEnter: ""
+    // };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]:value
-        });
-    };
+    // handleInputChange = event => {
+    //     const { name, value } = event.target;
+    //     this.setState({
+    //         [name]:value
+    //     });
+    // };
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
-        this.setState({
-            username:"",
-            password:"",
-            passwordReEnter:""
-        })
-    }
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
+    //     this.setState({
+    //         username:"",
+    //         password:"",
+    //         passwordReEnter:""
+    //     })
+    // }
 
     render() {
+        console.log(Component);
+        console.log(this.props);
         return (
+            
             <div className="container">
                 <div className="row">
                     <div className="col s12 m12">
@@ -45,9 +48,9 @@ class Register extends Component {
                                                 id="username" 
                                                 type="text" 
                                                 className="validate"
-                                                value={this.state.username}
+                                                value={this.props.username}
                                                 name="username"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
@@ -58,9 +61,9 @@ class Register extends Component {
                                                 id="password"
                                                 type="password"
                                                 className="validate"
-                                                value={this.state.password}
+                                                value={this.props.password}
                                                 name="password"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
@@ -72,8 +75,8 @@ class Register extends Component {
                                                 type="password"
                                                 className="validate"
                                                 name="passwordReEnter"
-                                                value={this.state.passwordReEnter}
-                                                onChange={this.handleInputChange} />
+                                                value={this.props.passwordReEnter}
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                     </form>
@@ -82,7 +85,7 @@ class Register extends Component {
                                             className="btn waves-effect waves-light"
                                             type="submit"
                                             name="action"
-                                            onClick={this.handleFormSubmit}>Submit
+                                            >Submit
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>
