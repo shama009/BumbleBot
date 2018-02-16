@@ -10,6 +10,10 @@ export default {
     },
 
     twitterHit: () => {
-        return axios.get("/auth/twitter");
+        console.log("api");
+        return axios.get("/auth/twitter", function(req, res, next){
+            console.log("client");
+            //console.log(req);
+        });
     }
 }
