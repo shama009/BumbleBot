@@ -60,6 +60,7 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="input-field col s12">
                                             <input
+                                                placeholder="username"
                                                 id="log-in" type="text"
                                                 value={this.state.username}
                                                 className="validate"
@@ -87,11 +88,6 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="col s12">
                                             Not a Member? Register <a href="/register">HERE</a>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col s12">
-                                            TEST? <a href={'/auth/twitter'}>TEST</a>
                                         </div>
                                     </div>
                                 </form>

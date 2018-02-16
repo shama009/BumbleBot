@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Register.css";
-import "../../utils/API"
+import API from "../../utils/API"
 
 class Register extends Component {
 
@@ -42,11 +42,6 @@ class Register extends Component {
         else {
             alert("Password's don't match!");
         } 
-        this.setState({
-            username:"",
-            password:"",
-            passwordReEnter:""
-        })
     }
 
     render() {
@@ -61,7 +56,6 @@ class Register extends Component {
                                     <form className="col s12">
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="username">Username</label>
                                             <input 
                                                 placeholder="username" 
                                                 id="username" 
@@ -74,7 +68,6 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="password">Password</label>
                                             <input 
                                                 placeholder="password"
                                                 id="password"
@@ -87,9 +80,8 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                             <input
-                                                placeholder="-"
+                                                placeholder="Re-enter password"
                                                 id="reEnterPwd"
                                                 type="password"
                                                 className="validate"
