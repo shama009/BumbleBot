@@ -1,11 +1,31 @@
 import axios from "axios";
 
 export default {
-    getUsers: () => {
-        return axios.get("/api/users");
+    getUser: (username) => {
+        return axios.post("/api/users", username);
     },
 
     saveUser: (userData) => {
         return axios.post("/api/user", userData);
-    }
+    },
+
+    get: () => {
+        return axios.get()
+    },
+    postTweet: () => {
+        return axios.get()
+    },
+
+    followTweet: () => {
+        return axios.get()
+    },
+
+    faveTweet: () => {
+        return axios.get()
+    },
+
+    reTweet: () => {
+        return axios.get()
+    },
+
 }

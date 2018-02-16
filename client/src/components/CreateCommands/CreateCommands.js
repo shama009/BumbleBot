@@ -1,14 +1,39 @@
 import React, { Component } from "react";
 import Navbar2 from "../Navbar2";
 import "./CreateCommands.css"
+// import API from "../utils/API"
 
 
 class CreateCommands extends Component {
 
+    state = {
+        input: ""
+    };
 
+    postTweetHandler(e) {
+        e.preventDefault();
+        console.log("post tweet")
+        // API.postTweet
+    }
 
+    
+    followTweetHandler(e) {
+        e.preventDefault();
+        console.log("follow tweet")
+        // API.followTweet
+    }
 
+    faveTweetHandler(e) {
+        e.preventDefault();
+        console.log("fave tweet")
+        // API.faveTweet
+    }
 
+    reTweetHandler(e) {
+        e.preventDefault();
+        console.log("re tweet")
+        // API.reTweet
+    }
 
     render() {
 
@@ -27,9 +52,10 @@ class CreateCommands extends Component {
                                     <input placeholder="Follow Tweet" type="text" className="validate" />
                                     <label htmlFor="follow-tweet"></label>
                                 </div>
+                                
                                 <div className="card-action">
-                                    <a href="">This is a link</a>
-                                    <a href="">This is a link</a>
+                                    <a onClick={this.followTweetHandler} href="">Send Command</a>
+                                    {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
                         </div>
@@ -43,8 +69,8 @@ class CreateCommands extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <a href="">This is a link</a>
-                                    <a href="">This is a link</a>
+                                <a onClick={this.postTweetHandler} href="">Send Command</a>
+                                    {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
                         </div>
@@ -60,8 +86,8 @@ class CreateCommands extends Component {
                                     <label htmlFor="re-tweet"></label>
                                 </div>
                                 <div className="card-action">
-                                    <a href="">This is a link</a>
-                                    <a href="">This is a link</a>
+                                <a onClick={this.reTweetHandler} href="">Send Command</a>
+                                    {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
                         </div>
@@ -75,8 +101,8 @@ class CreateCommands extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <a href="">This is a link</a>
-                                    <a href="">This is a link</a>
+                                <a onClick={this.faveTweetHandler} href="">Send Command</a>
+                                    {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
                         </div>

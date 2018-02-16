@@ -16,28 +16,33 @@ module.exports = function (app, db, passport) {
 // temporary routes ===============================================================
 
     app.post("/api/user", (req, res) => {
+        // console.log("Req.body: " + JSON.stringify(req.body));
         db.User
             .create(req.body)
             .then(userData => res.json(userData))
             .catch(err => res.status(422).json(err));
     });
 
-    app.get("/api/users", (req, res) => {
+    app.post("/api/users", (req, res) => {
+        console.log("User Req: " + req.body);
         db.User
-            .find()
-            .then(userData => res.json(userData))
+            .findOne(req.body)
+            .then(userData => {
+                console.log("User Data: " + userData);
+                res.json(userData);
+            })
             .catch(err => res.status(422).json(err));
     })
 
     // show the home page (will also have our login links)
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/test.html'));
-    });
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/test.html'));
+    // });
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/profile.html'));
-    });
+    // // PROFILE SECTION =========================
+    // app.get('/profile', isLoggedIn, (req, res) => {
+    //     res.sendFile(path.join(__dirname, '../views/profile.html'));
+    // });
 
     // LOGOUT ==============================
     app.get('/logout', (req, res) => {
@@ -50,9 +55,11 @@ module.exports = function (app, db, passport) {
     app.post("/api/twitter", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
-                _id: req.body.id
+                "twitter.id": req.body.id
             })
             .then(data => {
+
+                console.log(data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -69,7 +76,7 @@ module.exports = function (app, db, passport) {
                 switch (req.body.method) {
 
                     case "get":
-                        // setInterval(() => client.get(req.params.input), 5000);
+                        setInterval(() => client.get(req.params.input), 5000);
                         client.get(req.body.input, data => res.json(data));
                         break;
 
@@ -81,6 +88,11 @@ module.exports = function (app, db, passport) {
                         client.fav(req.body.input, data => res.json(data));
                         break;
 
+                    case "follow-listen":
+                        client.followListen(message => console.log(message));
+                        res.send("Listening for follows");
+                        break;
+
                     default:
                         res.send("err no method match");
                         break;
@@ -90,8 +102,7 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => res.json(err));
     });
-
-
+    
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
@@ -102,7 +113,7 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect: '/profile',
+            successRedirect: '/home',
             failureRedirect: '/'
         }));
     // send to twitter to do the authentication
@@ -126,6 +137,8 @@ module.exports = function (app, db, passport) {
             //res.json(user.twitter.token);
         });
     });
+
+    app.get("/test", (req, res) => res.send("test"));
 
 }
 

@@ -27,16 +27,16 @@ module.exports = class liri {
 
 
     // posts to twitter
-    post(status) {
+    post(status, callback) {
         this.client.post("statuses/update", {
             status: status
         }, function (error, tweet, response) {
 
             if (!error) {
-                console.log("Tweeted: " + tweet.text);
+                callback("Tweeted: " + tweet.text);
 
             } else {
-                console.log(error)
+                callback(error);
             }
         })
     }
@@ -134,21 +134,43 @@ module.exports = class liri {
 
     }
 
-    followListen() {
+    followListen(callback) {
         var stream = this.client.stream('user');
-        stream.on('follow', followed);
-
-        function followed(event) {
+        stream.on('follow', (event) => {
             var name = event.source.screen_name;
-            if (name != liri.twitter.screenName) {
-                console.log(name + " followed!");
-                liri.twitter.post("@" + name + " Thanks for following!");
-                liri.twitter.add(name);
+            if (name != this.screenName) {
+                callback(name + " followed!");
+                this.post("@" + name + " Thanks for following!", (msg) => {
+                    console.log(typeof msg);
+                    if (typeof msg == 'object') {
+                        console.log("array");
+                         console.log(msg[0]);
+                    } else {
+                        console.log("not array");
+                        console.log(msg);
+                    }
+                    this.add(name);
+                });
+                
             } else {
                 console.log("done");
                 return
             }
-        }
+        });
+        // followed: (event) => {
+        //     var name = event.source.screen_name;
+        //     if (name != this.screenName) {
+        //         callback(name + " followed!");
+        //         this.client.post("@" + name + " Thanks for following!", (msg) => {
+        //             console.log(msg)
+        //         });
+        //         this.client.add(name);
+        //     } else {
+        //         console.log("done");
+        //         return
+        //     }
+        // }
+
 
     }
 
@@ -184,6 +206,35 @@ module.exports = class liri {
         })
     }
 
+    stream(search) {
+
+        // c: pls limit requests
+        this.client.stream('statuses/filter', {
+            track: search
+        }, stream => {
+            stream.on('data', function (event) {
+                console.log(event);
+                console.log(event.id);
+                var id = event.id_str;
+                // liri.twitter.fav(id);
+                this.client.post("favorites/create", {
+                    id: id
+                }, (err) => {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    } else {
+                        console.log("tweet: " + id + " favorited")
+                    }
+                })
+                return;
+            });
+
+            stream.on('error', (error) => {
+                error
+            });
+        });
+    }
 };
 
 // console.log(new Liri("notthebotuwant", "MQjUzEMgEMqrxHKSR4AqkiRhT", "gGFT0pNpcbdAkh7hJhwrC7SRnKgqT9pubj3pZYWAvPoe7R3K9i", "942986559724314625-EnYoXOT4eEk6YkRqhvmfhxsrMnpT1gl", "0ZQSwPeB3zjjlcQVQuUNPJZWMzfebWu7nBEKHHv1dDWEq"));

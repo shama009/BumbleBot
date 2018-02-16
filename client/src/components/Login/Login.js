@@ -1,33 +1,35 @@
 import "./Login.css";
 import React, { Component } from 'react';
 import API from "../../utils/API";
-import Navbar3 from "../Navbar3";
 
 class Login extends Component {
     state = {
         username: "",
-        password: ""
+        password: "",
+        input: ""
     };
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
+        console.log(this.state);
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        localStorage.setItem("username", this.state.username);
-        localStorage.setItem("password", this.state.password);
-        API.getUsers()
+        API.getUser({
+            username: this.state.username
+        })
         .then(data => {
-            for(let i = 0; i < data.data.length; i++) {
-                if(this.state.username === data.data[i].username && this.state.password === data.data[i].password) {
-                    this.setState({ username: "", password: "" });
-                    window.location = "/home";
-                }
-                else {
-                    alert("username or password incorrect");
-                }
+            console.log(data);
+            if (!data.data) {
+                alert("no username exists, click link to register below");
+            }
+            else if (this.state.password === data.data.password) {
+                window.location = "/home";
+            }
+            else {
+                alert("Password or Username is incorrect");
             }
         })
         
@@ -37,11 +39,15 @@ class Login extends Component {
         e.preventDefault();
         console.log("clicked");
     }
+
+    test(event) {
+        event.preventDefault();
+        // API.get();
+        API.get().then(response => console.log(response));
+    }
+
     render() {
-        return (
-        <div>
-            <Navbar3/>
-            <div className="container">
+        return (<div className="container">
             <div className="row">
                 <div className="col s12 m8 offset-m2">
                     <div className="card blue-grey darken-1" id="login-card">
@@ -84,12 +90,16 @@ class Login extends Component {
                                             Not a Member? Register <a href="/register">HERE</a>
                                         </div>
                                     </div>
+                                    <div className="row">
+                                        <div className="col s12">
+                                            TEST? <a href={'/auth/twitter'}>TEST</a>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         );
