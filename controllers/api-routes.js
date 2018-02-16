@@ -10,10 +10,10 @@ function isLoggedIn(req, res, next) {
 
 }
 module.exports = function (app, db, passport) {
-  
+
     // normal routes ===============================================================
 
-// temporary routes ===============================================================
+    // temporary routes ===============================================================
 
     app.post("/api/user", (req, res) => {
         // console.log("Req.body: " + JSON.stringify(req.body));
@@ -49,7 +49,7 @@ module.exports = function (app, db, passport) {
         req.logout();
         res.redirect('/');
     });
-// temporary routes ===============================================================
+    // temporary routes ===============================================================
     //====================================================
 
     app.post("/api/twitter", (req, res) => {
@@ -59,7 +59,7 @@ module.exports = function (app, db, passport) {
             })
             .then(data => {
 
-                console.log(data);
+                // console.log("data" + data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -71,7 +71,7 @@ module.exports = function (app, db, passport) {
 
                 client.init();
 
-                console.log(client);
+                // console.log(client);
 
                 switch (req.body.method) {
 
@@ -102,20 +102,21 @@ module.exports = function (app, db, passport) {
             })
             .catch(err => res.json(err));
     });
-    
+
     // passport twitter --------------------------------
 
     // send to twitter to do the authentication
-    app.get('/auth/twitter', passport.authenticate('twitter', {
-        scope: 'email'
-    }));
+    app.get('/auth/twitter', passport.authenticate('twitter'));
 
     // handle the callback after twitter has authenticated the user
-    app.get('/auth/twitter/callback',
-        passport.authenticate('twitter', {
-            successRedirect: '/home',
-            failureRedirect: '/'
-        }));
+    app.get('/auth/twitter/callback', (req, res, next) => {
+            passport.authenticate('twitter', (err, user, info) => {
+                console.log(user);
+                res.redirect("/home");
+            })(req, res, next)
+        }
+    );
+
     // send to twitter to do the authentication
     app.get('/connect/twitter', passport.authorize('twitter', {
         scope: 'email'
@@ -124,7 +125,7 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authorized the user
     app.get('/connect/twitter/callback',
         passport.authorize('twitter', {
-            successRedirect: '/profile',
+            successRedirect: '/home',
             failureRedirect: '/'
         }));
     // unlink twitter --------------------------------
@@ -143,3 +144,19 @@ module.exports = function (app, db, passport) {
 }
 
 
+// app.get('/login', function (req, res, next) {
+//     passport.authenticate('local', function (err, user, info) {
+//         if (err) {
+//             return next(err);
+//         }
+//         if (!user) {
+//             return res.redirect('/login');
+//         }
+//         req.logIn(user, function (err) {
+//             if (err) {
+//                 return next(err);
+//             }
+//             return res.redirect('/users/' + user.username);
+//         });
+//     })(req, res, next);
+// });

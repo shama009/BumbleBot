@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import "./Navbar.css";
+import API from "../../utils/API";
 
 class Navbar extends Component {
 
     logOut = () => {
         localStorage.clear();
+    }
+
+    test = () => {
+        let data = {
+            method: "fav",
+            input: "cats",
+            id: "943715429070942208"
+        };
+
+        // API.test(data).then(data => console.log(data));
     }
 
     render() {
@@ -24,7 +35,7 @@ class Navbar extends Component {
                     </ul>
 
                     <ul className="right side-nav" id="mobile">
-                        <li><a href="create-command.html">Create Command</a></li>
+                        <li><a onClick={this.test()}>Create Command</a></li>
                         <li><a href="/"
                         onClick={this.logOut}>Log Out</a></li>
                     </ul>
