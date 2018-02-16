@@ -11,10 +11,7 @@ function isLoggedIn(req, res, next) {
 }
 module.exports = function (app, db, passport) {
 
-    // normal routes ===============================================================
-
-    // temporary routes ===============================================================
-
+// user registration route
     app.post("/api/user", (req, res) => {
         // console.log("Req.body: " + JSON.stringify(req.body));
         db.User
@@ -22,7 +19,7 @@ module.exports = function (app, db, passport) {
             .then(userData => res.json(userData))
             .catch(err => res.status(422).json(err));
     });
-
+//user login route
     app.post("/api/users", (req, res) => {
         console.log("User Req: " + req.body);
         db.User
@@ -32,17 +29,7 @@ module.exports = function (app, db, passport) {
                 res.json(userData);
             })
             .catch(err => res.status(422).json(err));
-    })
-
-    // show the home page (will also have our login links)
-    // app.get('/', (req, res) => {
-    //     res.sendFile(path.join(__dirname, '../views/test.html'));
-    // });
-
-    // // PROFILE SECTION =========================
-    // app.get('/profile', isLoggedIn, (req, res) => {
-    //     res.sendFile(path.join(__dirname, '../views/profile.html'));
-    // });
+    });
 
     // LOGOUT ==============================
     app.get('/logout', (req, res) => {
@@ -110,34 +97,12 @@ module.exports = function (app, db, passport) {
 
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback', (req, res, next) => {
-            passport.authenticate('twitter', (err, user, info) => {
-                console.log(user);
-                res.json(user);
-            })(req, res, next)
-        }
-    );
-
-    // send to twitter to do the authentication
-    app.get('/connect/twitter', passport.authorize('twitter', {
-        scope: 'email'
-    }));
-
-    // handle the callback after twitter has authorized the user
-    app.get('/connect/twitter/callback',
-        passport.authorize('twitter', {
-            successRedirect: '/home',
-            failureRedirect: '/'
-        }));
-    // unlink twitter --------------------------------
-    app.get('/unlink/twitter', isLoggedIn, (req, res) => {
-        var user = req.user;
-        user.twitter.token = undefined;
-        user.save((err) => {
-            if (err) throw err;
-            res.redirect('/profile');
-            //res.json(user.twitter.token);
-        });
-    });
+        passport.authenticate('twitter', (err, user, info) => {
+            console.log(user);
+            res.redirect("/home");
+        })(req, res, next)
+    }
+);
 
     app.get("/test", (req, res) => res.send("test"));
 
