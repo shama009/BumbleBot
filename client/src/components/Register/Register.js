@@ -18,18 +18,9 @@ class Register extends Component {
     //     });
     // };
 
-    // handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
-    //     this.setState({
-    //         username:"",
-    //         password:"",
-    //         passwordReEnter:""
-    //     })
-    // }
+   
 
     render() {
-        console.log(Component);
         console.log(this.props);
         return (
             <div>
@@ -85,7 +76,7 @@ class Register extends Component {
                                             id="registerBtn"
                                             type="submit"
                                             name="action"
-                                            onSubmit={this.props.handleFormSubmit}
+                                            onClick={this.props.handleFormSubmit}
                                             >Submit
                                             <i className="material-icons right">send</i>
                                         </button>
