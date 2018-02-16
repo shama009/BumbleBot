@@ -9,7 +9,7 @@ export default {
         return axios.post("/api/user", userData);
     },
 
-    get: () => {
-      return axios.get()
+    test: (data) => {
+      return axios.post("api/twitter", data);
     }
 }
