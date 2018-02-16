@@ -1,11 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import Navbar from "../Navbar/Navbar";
 import Tweets from "../Tweets/Tweets";
 import CommandsList from "../CommandsList/CommandsList";
 import "./Home.css";
 
-const Home = () => (
-    
+const Home = props => (
     <div>
         <Navbar />
         <div className="container">
@@ -16,5 +15,6 @@ const Home = () => (
         </div>
     </div>
 )
+    
 
 export default Home;

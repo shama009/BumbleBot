@@ -8,6 +8,7 @@ class Login extends Component {
         password: "",
         input: ""
     };
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -15,6 +16,7 @@ class Login extends Component {
         });
         console.log(this.state);
     };
+
     handleFormSubmit = event => {
         event.preventDefault();
         API.getUser({
@@ -33,7 +35,6 @@ class Login extends Component {
                 alert("Password or Username is incorrect");
             }
         })
-        
     };
 
     loginHandler(e) {
@@ -59,12 +60,12 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="input-field col s12">
                                             <input
+                                                placeholder="username"
                                                 id="log-in" type="text"
                                                 value={this.state.username}
                                                 className="validate"
                                                 name="username"
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="log-in">Username</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -77,7 +78,6 @@ class Login extends Component {
                                                 name="password"
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -90,11 +90,6 @@ class Login extends Component {
                                             Not a Member? Register <a href="/register">HERE</a>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col s12">
-                                            TEST? <a href={'/auth/twitter'}>TEST</a>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -105,4 +100,5 @@ class Login extends Component {
         );
     }
 }
+
 export default Login;
