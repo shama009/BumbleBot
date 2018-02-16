@@ -7,22 +7,14 @@ const passport     = require('passport');
 const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
-const cors         = require('cors');
-
-const PORT = process.env.PORT || 3000;
 const app = express();
-
-app.use(cors());
+const PORT = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
 app.use(express.static("client/build"));
-
-app.use(passport.initialize());
-app.use(passport.session()); 
-app.use(flash()); 
 
 app.use(logger('dev'));
 app.use(cookieParser()); 
