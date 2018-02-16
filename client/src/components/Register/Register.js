@@ -30,7 +30,7 @@ class Register extends Component {
                     })
                     .then(res => {
                         localStorage.setItem("username", this.state.username);
-                        window.location = "/home";
+                        window.location = "/twitter-sign-up";
                     })
                     .catch(err => console.log(err));
                 }
@@ -41,7 +41,7 @@ class Register extends Component {
             })
         }
         else {
-            alert("Password’s don’t match!");
+            alert("Password's don't match!");
         } 
     }
     render() {
@@ -58,7 +58,6 @@ class Register extends Component {
                                     <form className="col s12">
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="username">Username</label>
                                             <input 
                                                 placeholder="username" 
                                                 id="username" 
@@ -71,7 +70,6 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="password">Password</label>
                                             <input 
                                                 placeholder="password"
                                                 id="password"
@@ -84,9 +82,8 @@ class Register extends Component {
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                             <input
-                                                placeholder="-"
+                                                placeholder="Re-enter password"
                                                 id="reEnterPwd"
                                                 type="password"
                                                 className="validate"
@@ -99,6 +96,7 @@ class Register extends Component {
                                     <div className="row">
                                         <button 
                                             className="btn waves-effect waves-light"
+                                            id="registerBtn"
                                             type="submit"
                                             name="action"
                                             onClick={this.handleFormSubmit}>Submit

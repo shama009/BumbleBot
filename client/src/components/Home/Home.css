@@ -12,3 +12,7 @@ btn, .btn-large {
 .container {
     width: 80;
 }
+
+body {
+    background-image: url("../../images/bee.svg");
+}

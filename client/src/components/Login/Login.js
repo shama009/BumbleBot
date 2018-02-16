@@ -8,6 +8,7 @@ class Login extends Component {
         password: "",
         input: ""
     };
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -15,6 +16,7 @@ class Login extends Component {
         });
         console.log(this.state);
     };
+
     handleFormSubmit = event => {
         event.preventDefault();
         API.getUser({
@@ -26,13 +28,13 @@ class Login extends Component {
                 alert("no username exists, click link to register below");
             }
             else if (this.state.password === data.data.password) {
+                localStorage.setItem("username", this.state.username);
                 window.location = "/home";
             }
             else {
                 alert("Password or Username is incorrect");
             }
         })
-        
     };
 
     loginHandler(e) {
@@ -43,7 +45,7 @@ class Login extends Component {
     test(event) {
         event.preventDefault();
         // API.get();
-        API.get().then(response => console.log(response));
+        API.test().then(response => console.log(response));
     }
 
     render() {
@@ -64,7 +66,6 @@ class Login extends Component {
                                                 className="validate"
                                                 name="username"
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="log-in">Username</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -77,7 +78,6 @@ class Login extends Component {
                                                 name="password"
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange} />
-                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -90,11 +90,6 @@ class Login extends Component {
                                             Not a Member? Register <a href="/register">HERE</a>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col s12">
-                                            TEST? <a href={'/auth/twitter'}>TEST</a>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -105,4 +100,5 @@ class Login extends Component {
         );
     }
 }
+
 export default Login;

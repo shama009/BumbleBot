@@ -4,6 +4,8 @@ import Register from "./components/Register/";
 import Home from "./components/Home/";
 import Login from "./components/Login";
 import CreateCommands from "./components/CreateCommands"
+import SignupTwitter from "./components/SignUpTwitter/SignUpTwitter";
+
 
 class App extends Component {
 
@@ -14,7 +16,8 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/create-command.html" component={CreateCommands} />
+          <Route exact path="/create" component={CreateCommands} /> 
+          <Route exact path="/twitter-sign-up" component={SignupTwitter} />
         </div>
       </Router>
     );

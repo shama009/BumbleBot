@@ -26,6 +26,5 @@ export default {
 
     reTweet: () => {
         return axios.get()
-    },
-
+    }
 }
