@@ -1,6 +1,5 @@
 import React from "react";
 import "./CommandsList.css";
-import SignUpTwitter from "../SignUpTwitter/SignUpTwitter";
 
 const CommandsList = props => {
 
