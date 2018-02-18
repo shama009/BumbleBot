@@ -2,6 +2,7 @@ import React from "react";
 import "./SignUpTwitter.css";
 
 const SignUpTwitter = props => {
+  console.log(props);
     return (
       <div className="container">
         <div class="row">
