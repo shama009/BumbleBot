@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import Register from "./components/Register/";
 import Home from "./components/Home/";
 import Login from "./components/Login";
 import CreateCommands from "./components/CreateCommands"
 import SignupTwitter from "./components/SignUpTwitter/SignUpTwitter";
+import API from "./utils/API";
 
 
 class App extends Component {
@@ -12,7 +14,8 @@ class App extends Component {
   state = {
     username: "",
     password: "",
-    passwordReEnter: ""
+    passwordReEnter: "",
+    valid: false
   }
 
   handleInputChange = event => {
@@ -22,19 +25,53 @@ class App extends Component {
     });
   };
 
+//   handleFormSubmit = event => {
+//     event.preventDefault();
+//     console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
+//     // this.setState({
+//     //     username:"",
+//     //     password:"",
+//     //     passwordReEnter:""
+//     // })
+// };
+
+  loginFormSubmit = event => {
+    event.preventDefault();
+    API.getUser({
+        username: this.state.username
+    })
+    .then(data => {
+        if (!data.data) {
+            alert("no username exists, click link to register below");
+        }
+        else if (this.state.password === data.data.password) {
+          this.setState({
+            valid: true
+          });
+            localStorage.setItem("username", this.state.username);
+        }
+        else {
+            alert("Password or Username is incorrect");
+        }
+    })
+    
+  };
+
   registerSubmit = event => {
     event.preventDefault();
-    if (this.props.password === this.props.passwordReEnter) {
-        API.getUser({username: this.props.username})
+    if (this.state.password === this.state.passwordReEnter) {
+        API.getUser({username: this.state.username})
         .then(data => {
             if(!data.data) {
                 API.saveUser({
-                    username: this.props.username,
-                    password: this.props.password
+                    username: this.state.username,
+                    password: this.state.password
                 })
                 .then(res => {
-                    localStorage.setItem("username", this.props.username);
-                    // window.location = "/twitter-sign-up";
+                    localStorage.setItem("username", this.state.username);
+                   this.setState({
+                     valid: true
+                   }) 
                 })
                 .catch(err => console.log(err));
             }
@@ -51,15 +88,25 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Route exact path="/" render={() => <Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} />} />
-          <Route exact path="/home" component={Home} />
-          <Route path="/register" render={() => <Register username={this.state.username} password={this.state.password} passwordReEnter={this.state.passwordReEnter} handleInputChange={this.handleInputChange} registerSubmit={this.registerSubmit} />} />
-          <Route exact path="/create" component={CreateCommands} /> 
-          <Route exact path="/twitter-sign-up" render={() => <SignupTwitter username={this.state.username} password={this.state.password} />} />
-        </div>
-      </Router>
+    <Router>
+      <div>
+        <Route path="/register" render={() => {
+          if (this.state.valid) {
+            return <Redirect to="/twitter-sign-up" />
+          }
+          return (<Register username={this.state.username} password={this.state.password} passwordReEnter={this.state.passwordReEnter} handleInputChange={this.handleInputChange} registerSubmit={this.registerSubmit}  />)
+          }} />
+        <Route exact path="/home" render={() => <Home username={this.state.username} password={this.state.password} />} />
+        <Route exact path="/" render={() => {
+          if (this.state.valid) {
+            return <Redirect to="/home" />
+          } 
+          return (<Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit} valid={this.state.valid} />)
+          }} />
+        <Route path="/twitter-sign-up" render={() => <SignupTwitter username={this.state.username} password={this.state.password} />} />
+        <Route exact path="/create" render={() => <CreateCommands username={this.state.username} password={this.state.password} />} />
+      </div>
+    </Router>
     );
   }
 }

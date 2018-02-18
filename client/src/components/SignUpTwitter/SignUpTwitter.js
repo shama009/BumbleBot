@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import "./SignUpTwitter.css";
 
-const SignUpTwitter = props => {
-  console.log(props);
+class SignUpTwitter extends Component {
+  render() {
+  console.log(/*"Props from register: " + */ this.props);
     return (
       <div className="container">
         <div class="row">
@@ -23,6 +24,7 @@ const SignUpTwitter = props => {
         </div>
       </div>
     )
+  }
 }
 
 export default SignUpTwitter;
