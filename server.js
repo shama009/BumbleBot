@@ -64,6 +64,6 @@ require('./controllers/api-routes.js')(app, db, passport);
 //   res.sendFile(path.join(__dirname, "./views/test.html"));
 // });
 
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./client/build/index.html")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "../client/build/index.html")));
 
 app.listen(PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`));
