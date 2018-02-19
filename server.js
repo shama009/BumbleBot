@@ -54,7 +54,8 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-mongoose.connect("mongodb://localhost/liri");
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/liri");
 require('./config/passport')(passport);
 const db = require("./models");
 
