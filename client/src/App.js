@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Register from "./components/Register/";
 import Home from "./components/Home/";
 import Login from "./components/Login";
-import CreateCommands from "./components/CreateCommands"
+// import CreateCommands from "./components/CreateCommands"
 import SignupTwitter from "./components/SignUpTwitter/SignUpTwitter";
 import API from "./utils/API";
 
@@ -15,7 +15,9 @@ class App extends Component {
     username: "",
     password: "",
     passwordReEnter: "",
-    valid: false
+    valid: false,
+    method: "",
+    input: ""
   }
 
   handleInputChange = event => {
@@ -23,6 +25,8 @@ class App extends Component {
     this.setState({
       [name]: value
     });
+    localStorage.setItem(name, value);
+    console.log(this.state);
   };
 
 //   handleFormSubmit = event => {
@@ -84,11 +88,17 @@ class App extends Component {
         })
     }
     else {
-        alert("Password's don't match!");
+        alert("Passwords don't match!");
     } 
   }
 
+  twitterHandler = event => {
+    event.preventDefault();
+    console.log(this.state);
+  }
+
   render() {
+    
     return (
     <Router>
       <div>
@@ -98,7 +108,7 @@ class App extends Component {
           }
           return (<Register username={this.state.username} password={this.state.password} passwordReEnter={this.state.passwordReEnter} handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit}  />)
           }} />
-        <Route exact path="/home" render={() => <Home username={this.state.username} password={this.state.password} />} />
+        <Route exact path="/home" render={() => <Home username={this.state.username} password={this.state.password} method={this.state.method} input={this.state.input} handleInputChange={this.handleInputChange} twitterHandler={this.twitterHandler} />} />
         <Route exact path="/" render={() => <Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit} valid={this.state.valid} />} />
         <Route path="/twitter-sign-up" render={() => <SignupTwitter username={this.state.username} password={this.state.password} />} />
       </div>

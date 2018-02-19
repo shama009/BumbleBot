@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Register.css";
 import Navbar3 from "../Navbar3";
-import API from "../../utils/API"
+// import API from "../../utils/API"
 
 class Register extends Component {
 

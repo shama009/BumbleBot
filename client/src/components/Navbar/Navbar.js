@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./Navbar.css";
-import API from "../../utils/API";
+// import "./Navbar.css";
+// import API from "../../utils/API";
 
 class Navbar extends Component {
 
@@ -26,7 +26,7 @@ class Navbar extends Component {
                     </ul>
 
                     <ul className="right side-nav" id="mobile">
-                        <li><a onClick={console.log("hi")}>Create Command</a></li>
+                        <li><a onClick={console.log("why does this console log")}>Create Command</a></li>
                         <li><a href="/"
                         onClick={this.logOut}>Log Out</a></li>
                     </ul>

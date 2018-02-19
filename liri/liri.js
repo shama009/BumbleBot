@@ -1,4 +1,6 @@
-var Twitter = require('twitter');
+const Twitter = require('twitter');
+const moment = require('moment');
+moment().format();
 
 module.exports = class liri {
 
@@ -45,49 +47,49 @@ module.exports = class liri {
     // search twitter
     get(search, callback) {
 
-        if (search) {
+        // if (search) {
 
-            this.client.get('search/tweets', {
-                q: search,
-                count: 1
-            }, (error, tweets, response) => {
+        this.client.get('search/tweets', {
+            q: "cats",
+            result_type: "recent"
+            // result_type: "recent"
+        }, (err, tweets, response) => {
 
-                console.log("TWEET HISTORY (NEWEST TO OLDEST)");
-                console.log(`FROM ${this.screenName}`);
+            console.log("TWEET HISTORY (NEWEST TO OLDEST)");
+            console.log(`FROM ${this.screenName}`);
 
-                for (let i = 0; i < tweets.statuses.length; i++) {
+            // for (let i = 0; i < tweets; i++) {
 
-                    console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+            console.log(tweets);
+            // let response = {
+            //     screen_name: this.screenName,
+            //     text: tweets.statuses[i].text
+            // };
 
-                    let response = {
-                        screen_name: this.screenName,
-                        text: tweets.statuses[i].text
-                    };
+            // console.log(response);
 
-                    console.log(response);
+            callback(tweets);
+            // }
+        });
 
-                    callback(response);
-                }
-            });
+        // } else {
 
-        } else {
+        //     liri.twitter.client.get('search/tweets', {
+        //         q: this.screenName
+        //     }, function (error, tweets, response) {
+        //         if (error) {
+        //             console.log(error);
+        //             return
+        //         }
 
-            liri.twitter.client.get('search/tweets', {
-                q: this.screenName
-            }, function (error, tweets, response) {
-                if (error) {
-                    console.log(error);
-                    return
-                }
+        //         console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
 
-                console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
+        //         for (let i = 0; i < tweets.statuses.length; i++) {
 
-                for (let i = 0; i < tweets.statuses.length; i++) {
-
-                    console.log("TWEET " + i + ": " + tweets.statuses[i].text);
-                }
-            });
-        }
+        //             console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+        //         }
+        //     });
+        // }
     }
 
     // retweet tweets by search
@@ -144,14 +146,14 @@ module.exports = class liri {
                     console.log(typeof msg);
                     if (typeof msg == 'object') {
                         console.log("array");
-                         console.log(msg[0]);
+                        console.log(msg[0]);
                     } else {
                         console.log("not array");
                         console.log(msg);
                     }
                     this.add(name);
                 });
-                
+
             } else {
                 console.log("done");
                 return
@@ -176,33 +178,43 @@ module.exports = class liri {
 
     fav(search, callback) {
 
+
         this.client.get("search/tweets", {
             q: search,
-            count: 1
+            count: 1,
+            result_type: "recent"
         }, (error, tweets, response) => {
-            var tweetext = (tweets.statuses[0].text);
-            var id = (tweets.statuses[0].id_str);
-            if (search) {
-                this.client.post("favorites/create", {
-                    id: id
-                }, function (err) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    } else {
-                        console.log("tweet: " + tweetext + " favorited");
+            if (!tweets.statuses[0]) {
+                console.log(tweets);
+                return
+            } else {
+                console.log(response.headers['x-rate-limit-remaining']);
+                console.log(moment.unix(response.headers['x-rate-limit-reset']));
+                var tweetext = (tweets.statuses[0].text);
+                var id = (tweets.statuses[0].id_str);
+                if (search) {
+                    this.client.post("favorites/create", {
+                        id: id
+                    }, function (err) {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        } else {
+                            console.log("tweet: " + tweetext + " favorited");
 
-                        let response = {
-                            text: tweets.statuses[0].text
-                        };
+                            let response = {
+                                text: tweets.statuses[0].text
+                            };
 
-                        console.log(response);
+                            // console.log(response);
 
-                        callback(response);
-                    }
-                })
+                            callback(response);
+                        }
+                    })
 
+                }
             }
+
         })
     }
 
