@@ -71,8 +71,7 @@ module.exports = class liri {
             });
 
         } else {
-
-            liri.twitter.client.get('search/tweets', {
+            this.client.get('search/tweets', {
                 q: this.screenName
             }, function (error, tweets, response) {
                 if (error) {
@@ -81,11 +80,12 @@ module.exports = class liri {
                 }
 
                 console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
-
-                for (let i = 0; i < tweets.statuses.length; i++) {
-
-                    console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+                console.log(tweets);
+                
+                let data = {
+                    tweets: tweets.statuses
                 }
+                callback(data);
             });
         }
     }
