@@ -218,25 +218,26 @@ module.exports = class liri {
         })
     }
 
-    stream(search) {
+    stream(search, callback) {
 
         // c: pls limit requests
         this.client.stream('statuses/filter', {
             track: search
         }, stream => {
-            stream.on('data', function (event) {
-                console.log(event);
+            stream.on('data', (event) => {
+                // console.log(event);
                 console.log(event.id);
                 var id = event.id_str;
                 // liri.twitter.fav(id);
                 this.client.post("favorites/create", {
                     id: id
-                }, (err) => {
+                }, (err, data, response) => {
                     if (err) {
                         console.log(err);
                         return;
                     } else {
-                        console.log("tweet: " + id + " favorited")
+                        // console.log(response);
+                        callback("tweet: " + id + " favorited")
                     }
                 })
                 return;
