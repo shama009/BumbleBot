@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(express.static("client/build"));
+// app.use(express.static("client/build"));
 
 app.use(logger('dev'));
 app.use(cookieParser());
@@ -53,7 +53,6 @@ var sess = {
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/liri");
 require('./config/passport')(passport);

@@ -76,6 +76,11 @@ module.exports = function (app, db, passport) {
                         setInterval(() => client.fav(req.body.input, info => console.log(client.access_token_key, info)), req.body.interval);
                         break;
 
+                    case "stream":
+
+                        client.stream(req.body.input, info => console.log(info));
+                        break;
+
                     case "follow-listen":
                         client.followListen(message => console.log(message));
                         // res.send("Listening for follows");
