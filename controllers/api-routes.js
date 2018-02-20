@@ -62,7 +62,7 @@ module.exports = function (app, db, passport) {
             client.get(null, tweets => {
                 res.json(tweets);
             });
-        }).catch(err => {
+        }).catch(err => {   
             console.log(err);
         })
     });
