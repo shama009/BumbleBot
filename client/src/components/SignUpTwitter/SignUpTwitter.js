@@ -4,10 +4,6 @@ import API from "../../utils/API";
 
 class SignUpTwitter extends Component {
 
-  test() {
-    API.test();
-  }
-
   render() {
   console.log(/*"Props from register: " + */ this.props);
     return (
@@ -24,11 +20,6 @@ class SignUpTwitter extends Component {
                   id="twitterBtn"
                   href="/auth/twitter"
                   target="_blank">
-                  <i className="fab fa-twitter"></i> Sign up with Twitter</a>
-                  <a
-                  className="waves-effect waves-light btn"
-                  id="twitterBtn"
-                  onClick={this.test}>
                   <i className="fab fa-twitter"></i> Sign up with Twitter</a>
               </div>
             </div>

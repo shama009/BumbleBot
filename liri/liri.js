@@ -47,7 +47,7 @@ module.exports = class liri {
     // search twitter
     get(search, callback) {
 
-        // if (search) {
+        if (search) {
 
         this.client.get('search/tweets', {
             q: "cats",
