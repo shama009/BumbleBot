@@ -30,6 +30,7 @@ module.exports = class liri {
 
     // posts to twitter
     post(status, callback) {
+        console.log("Post: " + status);
         this.client.post("statuses/update", {
             status: status
         }, function (error, tweet, response) {
@@ -182,8 +183,7 @@ module.exports = class liri {
 
     }
 
-    fav(search, callback) {
-
+    fav(search) {
 
         this.client.get("search/tweets", {
             q: search,
@@ -214,7 +214,7 @@ module.exports = class liri {
 
                             // console.log(response);
 
-                            callback(response);
+                            // callback(response);
                         }
                     })
 
