@@ -13,7 +13,7 @@ function isLoggedIn(req, res, next) {
 }
 module.exports = function (app, db, passport) {
 
-// user registration route
+    // user registration route
     app.post("/api/user", (req, res) => {
         // console.log("Req.body: " + JSON.stringify(req.body));
         db.User
@@ -21,7 +21,7 @@ module.exports = function (app, db, passport) {
             .then(userData => res.json(userData))
             .catch(err => res.status(422).json(err));
     });
-//user login route
+    //user login route
     app.post("/api/users", (req, res) => {
         console.log("User Req: " + req.body);
         db.User
@@ -86,7 +86,7 @@ module.exports = function (app, db, passport) {
 
                 client.init();
 
-                // console.log(client);
+                console.log(req.body);
 
                 switch (req.body.method) {
 
@@ -97,6 +97,7 @@ module.exports = function (app, db, passport) {
                         else {
                             client.get(req.body.input);
                         }
+
                         break;
                         
 
@@ -105,12 +106,18 @@ module.exports = function (app, db, passport) {
                         break;
 
                     case "fav":
-                        client.fav(req.body.input, data => res.json(data));
+
+                        setInterval(() => client.fav(req.body.input, info => console.log(client.access_token_key, info)), req.body.interval);
+                        break;
+
+                    case "stream":
+
+                        client.stream(req.body.input, info => console.log(info));
                         break;
 
                     case "follow-listen":
                         client.followListen(message => console.log(message));
-                        res.send("Listening for follows");
+                        // res.send("Listening for follows");
                         break;
 
                     default:
@@ -118,13 +125,18 @@ module.exports = function (app, db, passport) {
                         break;
                 }
 
+                let correctedInt = req.body.interval / 10;
+                res.json({
+                    message: `Method ${req.body.method} with Input ${input} set to repeat every ${correctedInt} seconds.`
+                });
+
                 // res.json(client);
             })
             .catch(err => res.json(err));
     });
 
-    // passport twitter --------------------------------
-
+    // // passport twitter --------------------------------
+    // app.get("/test", (req, res) => )
     // send to twitter to do the authentication
     app.get('/auth/twitter', passport.authenticate('twitter'));
 
@@ -135,10 +147,13 @@ module.exports = function (app, db, passport) {
             res.cookie("user", JSON.stringify(user));
             res.redirect("/home");
         })(req, res, next)
-    }
-);
+    });
 
-    app.get("/test", (req, res) => res.send("test"));
+    app.get("/test", (req, res) => {
+        res.json({
+            message: "test"
+        });
+    });
 
 }
 

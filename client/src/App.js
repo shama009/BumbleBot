@@ -15,7 +15,9 @@ class App extends Component {
     username: "",
     password: "",
     passwordReEnter: "",
-    valid: false
+    valid: false,
+    method: "",
+    input: ""
   }
 
   handleInputChange = event => {
@@ -23,6 +25,8 @@ class App extends Component {
     this.setState({
       [name]: value
     });
+    localStorage.setItem(name, value);
+    console.log(this.state);
   };
 
 //   handleFormSubmit = event => {
@@ -57,6 +61,7 @@ class App extends Component {
     
   // };
 
+
   // registerSubmit = event => {
   //   event.preventDefault();
   //   if (this.state.password === this.state.passwordReEnter) {
@@ -86,7 +91,14 @@ class App extends Component {
   //   } 
   // }
 
+
+  twitterHandler = event => {
+    event.preventDefault();
+    console.log(this.state);
+  }
+
   render() {
+    
     return (
     <Router>
       <div>
@@ -94,6 +106,7 @@ class App extends Component {
           if (this.state.valid) {
             return <Redirect to="/twitter-sign-up" />
           }
+
           return (<Register username={this.state.username} password={this.state.password} passwordReEnter={this.state.passwordReEnter} handleInputChange={this.handleInputChange} registerSubmit={this.registerSubmit}  />)
           }} /> */}
         <Route exact path="/" render={() => <SignupTwitter username={this.state.username} password={this.state.password} />} />
