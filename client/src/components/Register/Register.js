@@ -1,34 +1,29 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
-import "../../utils/API"
+import Navbar3 from "../Navbar3";
+// import API from "../../utils/API"
 
 class Register extends Component {
 
-    state = {
-        username: "",
-        password: "",
-        passwordReEnter: ""
-    };
+    // state = {
+    //     username: "",
+    //     password: "",
+    //     passwordReEnter: ""
+    // };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]:value
-        });
-    };
-
-    handleFormSubmit = event => {
-        event.preventDefault();
-        console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
-        this.setState({
-            username:"",
-            password:"",
-            passwordReEnter:""
-        })
-    }
+    // handleInputChange = event => {
+    //     const { name, value } = event.target;
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // };
 
     render() {
+        console.log(this.props);
         return (
+            <div>
+                <Navbar3/>
             <div className="container">
                 <div className="row">
                     <div className="col s12 m12">
@@ -39,50 +34,48 @@ class Register extends Component {
                                     <form className="col s12">
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="username">Username</label>
                                             <input 
                                                 placeholder="username" 
                                                 id="username" 
                                                 type="text" 
                                                 className="validate"
-                                                value={this.state.username}
+                                                value={this.props.username}
                                                 name="username"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="password">Password</label>
                                             <input 
                                                 placeholder="password"
                                                 id="password"
                                                 type="password"
                                                 className="validate"
-                                                value={this.state.password}
+                                                value={this.props.password}
                                                 name="password"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor="reEnterPwd">Re-Enter Password</label>
                                             <input
-                                                placeholder="-"
+                                                placeholder="Re-enter password"
                                                 id="reEnterPwd"
                                                 type="password"
                                                 className="validate"
                                                 name="passwordReEnter"
-                                                value={this.state.passwordReEnter}
-                                                onChange={this.handleInputChange} />
+                                                value={this.props.passwordReEnter}
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                     </form>
                                     <div className="row">
                                         <button 
                                             className="btn waves-effect waves-light"
+                                            id="registerBtn"
                                             type="submit"
                                             name="action"
-                                            onClick={this.handleFormSubmit}>Submit
+                                            onClick={this.props.registerSubmit}>Submit
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>
@@ -92,6 +85,8 @@ class Register extends Component {
                     </div>
                 </div>
             </div>
+            </div>
+            
         )
     }
 }
