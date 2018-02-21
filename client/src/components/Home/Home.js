@@ -1,10 +1,14 @@
 import Navbar from "../Navbar/Navbar";
 import Tweets from "../Tweets/Tweets";
+// import Tests from "../Test";
 import CommandsList from "../CommandsList/CommandsList";
+import CreateCommand from "../CreateCommands";
 import "./Home.css";
 import React, { Component } from "react";
+import API from "../../utils/API";
 
 class Home extends Component {
+
 
     componentDidMount() {
         console.log(document.cookie, typeof document.cookie);
@@ -20,6 +24,7 @@ class Home extends Component {
 
     render() {
         return (
+
         <div>
             <Navbar />
             <div className="container">

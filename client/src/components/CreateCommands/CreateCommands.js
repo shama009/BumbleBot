@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar2 from "../Navbar2";
 import "./CreateCommands.css"
-// import API from "../utils/API"
+import API from "../../utils/API"
 
 
 class CreateCommands extends Component {
@@ -19,10 +19,22 @@ class CreateCommands extends Component {
         // API.followTweet
     }
 
-    faveTweetHandler(e) {
+    faveTweetHandler = (e) => {
         e.preventDefault();
-        console.log("fave tweet")
-        // API.faveTweet
+        let data = {
+            method: "fav",
+            input: localStorage.getItem("input"),
+            id: localStorage.getItem("id")
+        };
+        console.log(data);
+        API.get(data).then(res => {
+            console.log(res);
+            this.setState({
+            apiResponse: res.data.text
+        });
+        
+    });
+        
     }
 
     // reTweetHandler(e) {
@@ -31,9 +43,9 @@ class CreateCommands extends Component {
     // }
 
     render() {
-
+console.log(this.state)
         return (
-
+            
             <div>
                 <Navbar2 />
                 <div className="container">
@@ -105,15 +117,16 @@ class CreateCommands extends Component {
                                 <div className="card-content white-text">
                                     <span className="card-title">Fave Tweet</span>
                                     <p>Put Instructions here on how to use command</p>
-                                    <input placeholder="Fave Tweet" type="text" className="validate" />
+                                    <input placeholder="Fave Tweet" type="text" value={this.props.input} className="validate" name="input" onChange={this.props.handleInputChange} />
                                     <label htmlFor="fave-tweet"></label>
 
                                 </div>
                                 <div className="card-action">
-                                <a onClick={this.faveTweetHandler} href="">Send Command</a>
+                                <a onClick={this.faveTweetHandler}>Send Command</a>
                                     {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
