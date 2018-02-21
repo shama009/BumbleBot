@@ -7,10 +7,6 @@ class Navbar2 extends Component {
         localStorage.clear();
     }
 
-    homeHandler =() => {
-        window.location = "/home"
-    }
-
     render() {
         return (
             <nav>
@@ -18,12 +14,12 @@ class Navbar2 extends Component {
                     <a href="/home" className="brand-logo"><i className="material-icons">cloud</i>BumbleBot</a>
                     <a href="" data-activates="mobile" className="button-collapse"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
-                        <li><a href="/home" onClick={this.homeHandler}>Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="/" onClick={this.logOut}>Log Out</a></li>
                     </ul>
 
                     <ul className="right side-nav" id="mobile">
-                        <li><a href="/home"onClick={this.homeHandler}>Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="/" onClick={this.logOut}>Log Out</a></li>
                     </ul>
                 </div>
