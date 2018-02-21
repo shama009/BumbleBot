@@ -18,7 +18,7 @@ class SignUpTwitter extends Component {
               <a
                   className="waves-effect waves-light btn"
                   id="twitterBtn"
-                  href="/auth/twitter"
+                  href="http://localhost:3001/auth/twitter"
                   target="_blank">
                   <i className="fab fa-twitter"></i> Sign up with Twitter</a>
               </div>

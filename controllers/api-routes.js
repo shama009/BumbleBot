@@ -152,9 +152,13 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
-            console.log(user);
-            res.cookie("user", JSON.stringify(user));
-            res.redirect("/home");
+            if (!user) {
+                res.redirect("http://localhost:3001/auth/twitter");
+            } else {
+                console.log(user);
+                res.cookie("user", JSON.stringify(user));
+                res.redirect("http://localhost:3000/home");
+            }
         })(req, res, next)
     });
 
