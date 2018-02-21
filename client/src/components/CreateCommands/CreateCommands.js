@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navbar2 from "../Navbar2";
-import "./CreateCommands.css"
+import "./CreateCommands.css";
 import API from "../../utils/API"
 
 
@@ -52,9 +52,12 @@ class CreateCommands extends Component {
                     <div id="create-command" className="row">
                         <div className="col s12 m6">
                             <div id="follow-tweet" className="card blue-grey darken-1">
-                                <div className="card-content white-text">
+                                <div className="card-content">
                                     <span className="card-title">Follow Tweet</span>
+                                    <br />
                                     <p>Click button below to follow back any accounts that follow you.</p>
+                                    <br />
+                                    <br />
                                 </div>
                                 <div className="card-action">
                                     <a onClick={this.props.followTweetHandler} href="">Send Command</a>
@@ -64,7 +67,7 @@ class CreateCommands extends Component {
                         </div>
                         <div className="col s12 m6">
                             <div id="post-tweet" className="card blue-grey darken-1">
-                                <div className="card-content white-text">
+                                <div className="card-content">
                                     <span className="card-title">Post Tweet</span>
                                     <p>Put Instructions here on how to use command</p>
                                     <input 
@@ -88,7 +91,7 @@ class CreateCommands extends Component {
                     <div id="create-command2" className="row">
                         <div className="col s12 m6">
                             <div id="re-tweet" className="card blue-grey darken-1">
-                                <div className="card-content white-text">
+                                <div className="card-content">
                                     <span className="card-title">ReTweet</span>
                                     <p>Put Instructions here on how to use command</p>
                                     <input
@@ -116,7 +119,7 @@ class CreateCommands extends Component {
                         </div>
                         <div className="col s12 m6">
                             <div id="fave-tweet" className="card blue-grey darken-1">
-                                <div className="card-content white-text">
+                                <div className="card-content">
                                     <span className="card-title">Fav Tweet</span>
                                     <p>Put Instructions here on how to use command</p>
                                     <input
