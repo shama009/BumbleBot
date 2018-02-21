@@ -62,7 +62,7 @@ class Login extends Component {
                                             <input
                                                 placeholder="username"
                                                 id="log-in" type="text"
-                                                value={this.state.username}
+                                                value={this.props.username}
                                                 className="validate"
                                                 name="username"
                                                 onChange={this.handleInputChange} />
@@ -81,7 +81,10 @@ class Login extends Component {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <button onClick={this.handleFormSubmit} className="btn waves-effect waves-light" type="submit" name="action">Submit
+                                        <button onClick={this.handleFormSubmit} 
+                                        className="btn waves-effect waves-light" 
+                                        type="submit" 
+                                        name="action">Submit
                                     <i className="material-icons right"></i>
                                         </button>
                                     </div>

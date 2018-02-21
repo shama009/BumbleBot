@@ -5,4 +5,9 @@
 
 #commands-list {
     margin-top: 100px;
+    background-color: black;
+}
+
+.collection-item {
+    border-color: rgb(255, 215, 1);
 }

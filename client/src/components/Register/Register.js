@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Register.css";
-import Navbar3 from "../Navbar3";
+// import Navbar3 from "../Navbar3";
 import API from "../../utils/API"
 
 class Register extends Component {
@@ -47,7 +47,7 @@ class Register extends Component {
     render() {
         return (
             <div>
-                <Navbar3/>
+                {/* <Navbar3/> */}
             <div className="container">
                 <div className="row">
                     <div className="col s12 m12">

@@ -49,13 +49,13 @@ class CreateCommands extends Component {
                                 <div className="card-content white-text">
                                     <span className="card-title">Follow Tweet</span>
                                     <p>Put Instructions here on how to use command</p>
-                                    <input placeholder="Follow Tweet" type="text" className="validate" />
+                                    <input placeholder="Follow Tweet" 
+                                    type="text" className="validate" />
                                     <label htmlFor="follow-tweet"></label>
                                 </div>
                                 
                                 <div className="card-action">
                                     <a onClick={this.followTweetHandler} href="">Send Command</a>
-                                    {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
                         </div>
