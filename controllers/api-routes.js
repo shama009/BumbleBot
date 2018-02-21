@@ -100,12 +100,18 @@ module.exports = function (app, db, passport) {
                         
 
                     case "post":
-                        client.post(req.body.input, data => res.json(data));
+                    console.log("Post api/twitter hit");
+                        client.post(req.body.input, data => console.log(data));
                         break;
 
                     case "fav":
-
-                        setInterval(() => client.fav(req.body.input, info => console.log(client.access_token_key, info)), req.body.interval);
+                    console.log("api/twitter hit");
+                        if(req.body.interval) {
+                            setInterval(() => client.fav(req.body.input, info => console.log(client.access_token_key, info)), req.body.interval);
+                        }
+                        else {
+                            client.fav(req.body.input);
+                        }
                         break;
 
                     case "stream":
@@ -152,9 +158,13 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
-            console.log(user);
-            res.cookie("user", JSON.stringify(user));
-            res.redirect("/home");
+            if (!user) {
+                res.redirect("http://localhost:3001/auth/twitter");
+            } else {
+                console.log(user);
+                res.cookie("user", JSON.stringify(user));
+                res.redirect("http://localhost:3000/home");
+            }
         })(req, res, next)
     });
 

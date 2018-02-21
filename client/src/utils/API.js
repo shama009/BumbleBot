@@ -15,16 +15,20 @@ export default {
 
     },
 
-    postTweet: () => {
-        return axios.get()
+    postTweet: (tweetData) => {
+        console.log("Post Utils route hit");
+        console.log(tweetData);
+        return axios.post("/api/twitter", tweetData);
     },
 
-    followTweet: () => {
-        return axios.get()
+    followTweet: (data) => {
+        console.log("Follow Utils route hit");
+        return axios.post("/api/twitter", data);
     },
 
-    faveTweet: () => {
-        return axios.get()
+    favTweet: (tweetData) => {
+        console.log("Utils route hit");
+        return axios.post("/api/twitter", tweetData);
     },
 
     reTweet: (tweetData) => {
