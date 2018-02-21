@@ -8,13 +8,13 @@ const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(express.static("client/build"));
+app.use(express.static("client/"));
 
 app.use(logger('dev'));
 app.use(cookieParser()); 
@@ -42,6 +42,6 @@ require('./controllers/api-routes.js')(app, db, passport);
 //   res.sendFile(path.join(__dirname, "./views/test.html"));
 // });
 
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./client/build/index.html")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./client/index.html")));
 
 app.listen(PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`));

@@ -58,6 +58,7 @@ class Login extends Component {
                                     <div className="row">
                                         <div className="input-field col s12">
                                             <input
+                                            placeholder="username"
                                                 id="log-in" type="text"
                                                 value={this.state.username}
                                                 className="validate"
