@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const session      = require('express-session');
 // const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use((req, res, next) => {
   // console.log("custom middleware");
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(express.static("client/build"));
+// app.use(express.static("client/build"));
 
 app.use(logger('dev'));
 app.use(cookieParser());

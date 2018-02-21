@@ -44,25 +44,25 @@ module.exports = function (app, db, passport) {
     app.post("/api/getTweets", (req, res) => {
         console.log(req.body.id);
         db.User.findOne({
-            "twitter.id": req.body.id
-        })
-        .then(data => {
+                "twitter.id": req.body.id
+            })
+            .then(data => {
 
-            let client = new Liri(
-                configAuth.twitterAuth.consumerKey,
-                configAuth.twitterAuth.consumerSecret,
-                data.twitter.token,
-                data.twitter.tokenSecret,
-                data.twitter.username
-            );
+                let client = new Liri(
+                    configAuth.twitterAuth.consumerKey,
+                    configAuth.twitterAuth.consumerSecret,
+                    data.twitter.token,
+                    data.twitter.tokenSecret,
+                    data.twitter.username
+                );
 
-            client.init();
-            client.get(null, tweets => {
-                res.json(tweets);
-            });
-        }).catch(err => {   
-            console.log(err);
-        })
+                client.init();
+                client.get(null, tweets => {
+                    res.json(tweets);
+                });
+            }).catch(err => {
+                console.log(err);
+            })
     });
 
     app.post("/api/twitter", (req, res) => {
@@ -89,15 +89,14 @@ module.exports = function (app, db, passport) {
                 switch (req.body.method) {
 
                     case "get":
-                        if(req.body.interval) {
+                        if (req.body.interval) {
                             setInterval(() => client.get(req.body.input), req.body.interval);
-                        }
-                        else {
+                        } else {
                             client.get(req.body.input);
                         }
 
                         break;
-                        
+
 
                     case "post":
                         client.post(req.body.input, data => res.json(data));
@@ -119,12 +118,11 @@ module.exports = function (app, db, passport) {
                         break;
 
                     case "retweet":
-                    console.log("hit");
-                    console.log(req.body);
-                        if(req.body.interval) {
+                        console.log("hit");
+                        console.log(req.body);
+                        if (req.body.interval) {
                             setInterval(() => client.retweet(req.body.input), req.body.interval);
-                        }
-                        else {
+                        } else {
                             client.retweet(req.body.input);
                         }
                         break;
@@ -152,9 +150,13 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
-            console.log(user);
-            res.cookie("user", JSON.stringify(user));
-            res.redirect("/home");
+            if (!user) {
+                res.redirect("http://localhost:3001/auth/twitter");
+            } else {
+                console.log(user);
+                res.cookie("user", JSON.stringify(user));
+                res.redirect("http://localhost:3000/home");
+            }
         })(req, res, next)
     });
 
