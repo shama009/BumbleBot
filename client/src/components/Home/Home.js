@@ -1,20 +1,41 @@
-import React, { Component } from "react";
 import Navbar from "../Navbar/Navbar";
 import Tweets from "../Tweets/Tweets";
+// import Tests from "../Test";
 import CommandsList from "../CommandsList/CommandsList";
+import CreateCommand from "../CreateCommands";
 import "./Home.css";
+import React, { Component } from "react";
+import API from "../../utils/API";
 
-const Home = props => (
-    <div>
-        <Navbar />
-        <div className="container">
-            <div className="row">
-                <Tweets />
-                <CommandsList />
+class Home extends Component {
+
+
+    componentDidMount() {
+        console.log(document.cookie, typeof document.cookie);
+        const cookiesParsed = decodeURIComponent(document.cookie);
+        const user = cookiesParsed.slice(5);
+        const final = JSON.parse(user);
+        localStorage.setItem("id", final.twitter.id);
+        localStorage.setItem("token", final.twitter.token);
+        localStorage.setItem("tokenSecret", final.twitter.tokenSecret);
+        localStorage.setItem("username", final.twitter.username);
+        return user;
+    };
+
+    render() {
+        return (
+
+        <div>
+            <Navbar />
+            <div className="container">
+                <div className="row">
+                    <Tweets />
+                    <CommandsList />
+                </div>
             </div>
         </div>
-    </div>
-)
-    
+    )
+  }
+}
 
 export default Home;
