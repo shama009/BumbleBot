@@ -16,8 +16,8 @@ class App extends Component {
     password: "",
     passwordReEnter: "",
     valid: false,
-    method: "",
-    input: ""
+    input: "",
+    interval: ""
   }
 
   handleInputChange = event => {
@@ -27,6 +27,22 @@ class App extends Component {
     });
     localStorage.setItem(name, value);
     console.log(this.state);
+  };
+
+  reTweetHandler = event => {
+    event.preventDefault();
+    console.log(this.state.input);
+    console.log(this.state.interval);
+    const math = this.state.interval * 1000;
+    console.log(math);
+    API.reTweet({
+      method: "retweet",
+      id: localStorage.getItem("id"),
+      input: this.state.input,
+      interval: math
+    }).then(res => {
+      console.log(res);
+    })
   };
 
 //   handleFormSubmit = event => {
@@ -117,7 +133,7 @@ class App extends Component {
           } 
           return (<Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit} valid={this.state.valid} />)
           }} /> */}       
-        <Route exact path="/create" render={() => <CreateCommands username={this.state.username} password={this.state.password} />} />
+        <Route exact path="/create" render={() => <CreateCommands reTweetHandler={this.reTweetHandler} input={this.state.input} interval={this.state.interval} handleInputChange={this.handleInputChange}/>} />
       </div>
     </Router>
     );

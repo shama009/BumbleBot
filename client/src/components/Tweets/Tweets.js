@@ -16,14 +16,14 @@ class Tweets extends Component {
             const text = [];
             const tweets = res.data.tweets.map((tweet) => {
                 text.push(
-                    <div id="tweets" className="col s12 m7">
+                    // <div id="tweets" className="col s12 m7">
                         <div className="card blue-grey darken-1 hoverable">
                             <div className="card-content white-text">
                                 <span className="card-title">{localStorage.getItem("username")}</span>
                                 <blockquote>{tweet.text}</blockquote>
                             </div>
                         </div>
-                    </div>
+                    // </div>
                 );
             });
             this.setState({
