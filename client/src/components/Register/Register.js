@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
 import Navbar3 from "../Navbar3";
 // import API from "../../utils/API"
@@ -14,11 +15,9 @@ class Register extends Component {
     // handleInputChange = event => {
     //     const { name, value } = event.target;
     //     this.setState({
-    //         [name]:value
+    //         [name]: value
     //     });
     // };
-
-   
 
     render() {
         console.log(this.props);
@@ -76,8 +75,7 @@ class Register extends Component {
                                             id="registerBtn"
                                             type="submit"
                                             name="action"
-                                            onClick={this.props.handleFormSubmit}
-                                            >Submit
+                                            onClick={this.props.registerSubmit}>Submit
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>

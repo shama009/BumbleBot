@@ -48,7 +48,7 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (<div className="container">
             <div className="row">
                 <div className="col s12 m8 offset-m2">
@@ -66,7 +66,6 @@ class Login extends Component {
                                                 className="validate"
                                                 name="username"
                                                 onChange={this.props.handleInputChange} />
-                                            <label htmlFor="log-in">Username</label>
                                         </div>
                                     </div>
                                     <div className="row">

@@ -9,7 +9,7 @@ class SignUpTwitter extends Component {
   }
 
   render() {
-  console.log(this.props);
+  console.log(/*"Props from register: " + */ this.props);
     return (
       <div className="container">
         <div className="row">

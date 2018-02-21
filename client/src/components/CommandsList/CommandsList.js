@@ -22,9 +22,6 @@ class CommandsList extends Component {
     }
 
 
-
-
-
     render() {
 
         return (

@@ -71,25 +71,25 @@ module.exports = class liri {
             callback(tweets);
             // }
         });
+      
+        } else {
+            this.client.get('search/tweets', {
+                q: this.screenName
+            }, function (error, tweets, response) {
+                if (error) {
+                    console.log(error);
+                    return
+                }
 
-        // } else {
-
-        //     liri.twitter.client.get('search/tweets', {
-        //         q: this.screenName
-        //     }, function (error, tweets, response) {
-        //         if (error) {
-        //             console.log(error);
-        //             return
-        //         }
-
-        //         console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
-
-        //         for (let i = 0; i < tweets.statuses.length; i++) {
-
-        //             console.log("TWEET " + i + ": " + tweets.statuses[i].text);
-        //         }
-        //     });
-        // }
+                console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
+                console.log(tweets);
+                
+                let data = {
+                    tweets: tweets.statuses
+                }
+                callback(data);
+            });
+        }
     }
 
     // retweet tweets by search

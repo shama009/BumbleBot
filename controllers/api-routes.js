@@ -1,3 +1,5 @@
+// import { read } from "fs";
+
 const Liri = require("../liri/liri");
 const configAuth = require('../config/auth');
 const path = require("path");
@@ -39,6 +41,32 @@ module.exports = function (app, db, passport) {
     // temporary routes ===============================================================
     //====================================================
 
+    app.post("/api/getTweets", (req, res) => {
+        console.log(req.body.id);
+        db.User.findOne({
+            "twitter.id": req.body.id
+        })
+        .then(data => {
+
+            // console.log("data" + data);
+
+            let client = new Liri(
+                configAuth.twitterAuth.consumerKey,
+                configAuth.twitterAuth.consumerSecret,
+                data.twitter.token,
+                data.twitter.tokenSecret,
+                data.twitter.username
+            );
+            console.log(data.twitter.username);
+            client.init();
+            client.get(null, tweets => {
+                res.json(tweets);
+            });
+        }).catch(err => {   
+            console.log(err);
+        })
+    });
+
     app.post("/api/twitter", (req, res) => {
         console.log(`endpoint hit`);
         db.User.findOne({
@@ -63,9 +91,15 @@ module.exports = function (app, db, passport) {
                 switch (req.body.method) {
 
                     case "get":
-                        setInterval(() => client.get(req.body.input, info => console.log(client, info)), req.body.interval);
-                        // client.get(req.body.input, data => res.json(data));
+                        if(req.body.interval) {
+                            setInterval(() => client.get(req.body.input), req.body.interval);
+                        }
+                        else {
+                            client.get(req.body.input);
+                        }
+
                         break;
+                        
 
                     case "post":
                         client.post(req.body.input, data => res.json(data));
