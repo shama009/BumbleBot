@@ -42,7 +42,7 @@ module.exports = function (app, db, passport) {
     //====================================================
 
     app.post("/api/getTweets", (req, res) => {
-        console.log(req.body.id);
+        console.log("test: " + req.body.id);
         db.User.findOne({
             "twitter.id": req.body.id
         })
@@ -158,9 +158,14 @@ module.exports = function (app, db, passport) {
     // handle the callback after twitter has authenticated the user
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
-            console.log(user);
-            res.cookie("user", JSON.stringify(user));
-            res.redirect("/home");
+            if (!user) {
+                res.redirect("/auth/twitter");
+            }
+            else {
+                console.log(user);
+                res.cookie("user", JSON.stringify(user));
+                res.redirect("/home");
+            }
         })(req, res, next)
     });
 

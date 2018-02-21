@@ -29,9 +29,10 @@ class Home extends Component {
             <Navbar />
             <div className="container">
                 <div className="row">
-                    <div id="tweets" className="col s12 m7">
+                    <div id="tweets" className="col s12 m6">
                         <Tweets />
                     </div>
+                    <div className="col s12 m1"></div>
                         <CommandsList />
                 </div>
             </div>
