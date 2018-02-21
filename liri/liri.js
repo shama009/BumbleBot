@@ -1,4 +1,6 @@
-var Twitter = require('twitter');
+const Twitter = require('twitter');
+const moment = require('moment');
+moment().format();
 
 module.exports = class liri {
 
@@ -47,32 +49,31 @@ module.exports = class liri {
 
         if (search) {
 
-            this.client.get('search/tweets', {
-                q: search,
-                count: 1
-            }, (error, tweets, response) => {
+        this.client.get('search/tweets', {
+            q: "cats",
+            result_type: "recent"
+            // result_type: "recent"
+        }, (err, tweets, response) => {
 
-                console.log("TWEET HISTORY (NEWEST TO OLDEST)");
-                console.log(`FROM ${this.screenName}`);
+            console.log("TWEET HISTORY (NEWEST TO OLDEST)");
+            console.log(`FROM ${this.screenName}`);
 
-                for (let i = 0; i < tweets.statuses.length; i++) {
+            // for (let i = 0; i < tweets; i++) {
 
-                    console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+            console.log(tweets);
+            // let response = {
+            //     screen_name: this.screenName,
+            //     text: tweets.statuses[i].text
+            // };
 
-                    let response = {
-                        screen_name: this.screenName,
-                        text: tweets.statuses[i].text
-                    };
+            // console.log(response);
 
-                    console.log(response);
-
-                    callback(response);
-                }
-            });
-
+            callback(tweets);
+            // }
+        });
+      
         } else {
-
-            liri.twitter.client.get('search/tweets', {
+            this.client.get('search/tweets', {
                 q: this.screenName
             }, function (error, tweets, response) {
                 if (error) {
@@ -81,42 +82,49 @@ module.exports = class liri {
                 }
 
                 console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
-
-                for (let i = 0; i < tweets.statuses.length; i++) {
-
-                    console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+                console.log(tweets);
+                
+                let data = {
+                    tweets: tweets.statuses
                 }
+                callback(data);
             });
         }
     }
 
     // retweet tweets by search
     retweet(search) {
-
+        console.log(search);
         this.client.get('search/tweets', {
-            q: search
-        }, function (error, tweets, response) {
+            q: search,
+            count: 1
+        }, (error, tweets, response) => {
 
-            // console.log(tweets);
+            console.log(tweets);
 
-            for (let i = 0; i < 1; i++) {
+            // for (let i = 0; i < 1; i++) {
 
-                console.log("TWEET " + i + ": " + tweets.statuses[i].text);
-                console.log("TWEET ID " + i + ": " + tweets.statuses[i].id);
+                // console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+                // console.log("TWEET ID " + i + ": " + tweets.statuses[i].id);
 
 
-
-                var tweetId = tweets.statuses[i].id_str;
-
-                liri.twitter.client.post("statuses/retweet/" + tweetId, function (error, tweet, response) {
-                    if (!error) {
-                        console.log("Tweeted: " + tweet.text);
-
-                    } else {
-                        console.log(error)
-                    }
-                });
+            if(tweets.statuses.length > 0) {
+                var tweetId = tweets.statuses[0].id_str;
+                
+                    this.client.post("statuses/retweet/" + tweetId, function (error, tweet, response) {
+                        if (!error) {
+                            console.log("Tweeted: " + tweet.text);
+    
+                        } else {
+                            console.log(error)
+                        }
+                    });
             }
+            else {
+                return;
+            }
+                
+            // }
         });
     }
 
@@ -144,14 +152,14 @@ module.exports = class liri {
                     console.log(typeof msg);
                     if (typeof msg == 'object') {
                         console.log("array");
-                         console.log(msg[0]);
+                        console.log(msg[0]);
                     } else {
                         console.log("not array");
                         console.log(msg);
                     }
                     this.add(name);
                 });
-                
+
             } else {
                 console.log("done");
                 return
@@ -176,55 +184,66 @@ module.exports = class liri {
 
     fav(search, callback) {
 
+
         this.client.get("search/tweets", {
             q: search,
-            count: 1
+            count: 1,
+            result_type: "recent"
         }, (error, tweets, response) => {
-            var tweetext = (tweets.statuses[0].text);
-            var id = (tweets.statuses[0].id_str);
-            if (search) {
-                this.client.post("favorites/create", {
-                    id: id
-                }, function (err) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    } else {
-                        console.log("tweet: " + tweetext + " favorited");
+            if (!tweets.statuses[0]) {
+                console.log(tweets);
+                return
+            } else {
+                console.log(response.headers['x-rate-limit-remaining']);
+                console.log(moment.unix(response.headers['x-rate-limit-reset']));
+                var tweetext = (tweets.statuses[0].text);
+                var id = (tweets.statuses[0].id_str);
+                if (search) {
+                    this.client.post("favorites/create", {
+                        id: id
+                    }, function (err) {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        } else {
+                            console.log("tweet: " + tweetext + " favorited");
 
-                        let response = {
-                            text: tweets.statuses[0].text
-                        };
+                            let response = {
+                                text: tweets.statuses[0].text
+                            };
 
-                        console.log(response);
+                            // console.log(response);
 
-                        callback(response);
-                    }
-                })
+                            callback(response);
+                        }
+                    })
 
+                }
             }
+
         })
     }
 
-    stream(search) {
+    stream(search, callback) {
 
         // c: pls limit requests
         this.client.stream('statuses/filter', {
             track: search
         }, stream => {
-            stream.on('data', function (event) {
-                console.log(event);
+            stream.on('data', (event) => {
+                // console.log(event);
                 console.log(event.id);
                 var id = event.id_str;
                 // liri.twitter.fav(id);
                 this.client.post("favorites/create", {
                     id: id
-                }, (err) => {
+                }, (err, data, response) => {
                     if (err) {
                         console.log(err);
                         return;
                     } else {
-                        console.log("tweet: " + id + " favorited")
+                        // console.log(response);
+                        callback("tweet: " + id + " favorited")
                     }
                 })
                 return;

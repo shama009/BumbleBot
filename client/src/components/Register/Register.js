@@ -1,50 +1,26 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
-// import Navbar3 from "../Navbar3";
-import API from "../../utils/API"
+import Navbar3 from "../Navbar3";
+// import API from "../../utils/API"
 
 class Register extends Component {
 
-    state = {
-        username: "",
-        password: "",
-        passwordReEnter: ""
-    };
+    // state = {
+    //     username: "",
+    //     password: "",
+    //     passwordReEnter: ""
+    // };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
+    // handleInputChange = event => {
+    //     const { name, value } = event.target;
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // };
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        if (this.state.password === this.state.passwordReEnter) {
-            API.getUser({username: this.state.username})
-            .then(data => {
-                if(!data.data) {
-                    API.saveUser({
-                        username: this.state.username,
-                        password: this.state.password
-                    })
-                    .then(res => {
-                        localStorage.setItem("username", this.state.username);
-                        window.location = "/twitter-sign-up";
-                    })
-                    .catch(err => console.log(err));
-                }
-                else {
-                    alert("Username already exists");
-                    return;
-                }
-            })
-        }
-        else {
-            alert("Password's don't match!");
-        } 
-    }
     render() {
+        console.log(this.props);
         return (
             <div>
                 {/* <Navbar3/> */}
@@ -63,9 +39,9 @@ class Register extends Component {
                                                 id="username" 
                                                 type="text" 
                                                 className="validate"
-                                                value={this.state.username}
+                                                value={this.props.username}
                                                 name="username"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
@@ -75,9 +51,9 @@ class Register extends Component {
                                                 id="password"
                                                 type="password"
                                                 className="validate"
-                                                value={this.state.password}
+                                                value={this.props.password}
                                                 name="password"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                         <div className="row">
@@ -88,8 +64,8 @@ class Register extends Component {
                                                 type="password"
                                                 className="validate"
                                                 name="passwordReEnter"
-                                                value={this.state.passwordReEnter}
-                                                onChange={this.handleInputChange} />
+                                                value={this.props.passwordReEnter}
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                         </div>
                                     </form>
@@ -99,7 +75,7 @@ class Register extends Component {
                                             id="registerBtn"
                                             type="submit"
                                             name="action"
-                                            onClick={this.handleFormSubmit}>Submit
+                                            onClick={this.props.registerSubmit}>Submit
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>

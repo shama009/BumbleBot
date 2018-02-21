@@ -3,39 +3,38 @@ import React, { Component } from 'react';
 import API from "../../utils/API";
 
 class Login extends Component {
-    state = {
-        username: "",
-        password: "",
-        input: ""
-    };
-
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-        console.log(this.state);
-    };
-
-    handleFormSubmit = event => {
-        event.preventDefault();
-        API.getUser({
-            username: this.state.username
-        })
-        .then(data => {
-            console.log(data);
-            if (!data.data) {
-                alert("no username exists, click link to register below");
-            }
-            else if (this.state.password === data.data.password) {
-                localStorage.setItem("username", this.state.username);
-                window.location = "/home";
-            }
-            else {
-                alert("Password or Username is incorrect");
-            }
-        })
-    };
+    // state = {
+    //     username: "",
+    //     password: "",
+    //     input: ""
+    // };
+    // handleInputChange = event => {
+    //     const { name, value } = event.target;
+    //     this.setState({
+    //         [name]: value
+    //     });
+    //     console.log(this.state);
+    // };
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     API.getUser({
+    //         username: this.state.username
+    //     })
+    //     .then(data => {
+    //         console.log(data);
+    //         if (!data.data) {
+    //             alert("no username exists, click link to register below");
+    //         }
+    //         else if (this.state.password === data.data.password) {
+    //             localStorage.setItem("username", this.state.username);
+    //             window.location = "/home";
+    //         }
+    //         else {
+    //             alert("Password or Username is incorrect");
+    //         }
+    //     })
+        
+    // };
 
     loginHandler(e) {
         e.preventDefault();
@@ -49,6 +48,7 @@ class Login extends Component {
     }
 
     render() {
+        // console.log(this.props);
         return (<div className="container">
             <div className="row">
                 <div className="col s12 m8 offset-m2">
@@ -65,7 +65,7 @@ class Login extends Component {
                                                 value={this.props.username}
                                                 className="validate"
                                                 name="username"
-                                                onChange={this.handleInputChange} />
+                                                onChange={this.props.handleInputChange} />
                                         </div>
                                     </div>
                                     <div className="row">
@@ -76,15 +76,13 @@ class Login extends Component {
                                                 type="password"
                                                 className="validate"
                                                 name="password"
-                                                value={this.state.password}
-                                                onChange={this.handleInputChange} />
+                                                value={this.props.password}
+                                                onChange={this.props.handleInputChange} />
+                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <button onClick={this.handleFormSubmit} 
-                                        className="btn waves-effect waves-light" 
-                                        type="submit" 
-                                        name="action">Submit
+                                        <button onClick={this.props.loginFormSubmit} className="btn waves-effect waves-light" type="submit" name="action">Submit
                                     <i className="material-icons right"></i>
                                         </button>
                                     </div>

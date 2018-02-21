@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import Navbar2 from "../Navbar2";
 import "./CreateCommands.css"
-// import API from "../utils/API"
+import API from "../../utils/API"
 
 
 class CreateCommands extends Component {
-
-    state = {
-        input: ""
-    };
 
     postTweetHandler(e) {
         e.preventDefault();
@@ -23,22 +19,33 @@ class CreateCommands extends Component {
         // API.followTweet
     }
 
-    faveTweetHandler(e) {
+    faveTweetHandler = (e) => {
         e.preventDefault();
-        console.log("fave tweet")
-        // API.faveTweet
+        let data = {
+            method: "fav",
+            input: localStorage.getItem("input"),
+            id: localStorage.getItem("id")
+        };
+        console.log(data);
+        API.get(data).then(res => {
+            console.log(res);
+            this.setState({
+            apiResponse: res.data.text
+        });
+        
+    });
+        
     }
 
-    reTweetHandler(e) {
-        e.preventDefault();
-        console.log("re tweet")
-        // API.reTweet
-    }
+    // reTweetHandler(e) {
+    //     e.preventDefault();
+    //     console.log(this.props);
+    // }
 
     render() {
-
+console.log(this.state)
         return (
-
+            
             <div>
                 <Navbar2 />
                 <div className="container">
@@ -82,11 +89,25 @@ class CreateCommands extends Component {
                                 <div className="card-content white-text">
                                     <span className="card-title">ReTweet</span>
                                     <p>Put Instructions here on how to use command</p>
-                                    <input placeholder="ReTweet" type="text" className="validate" />
-                                    <label htmlFor="re-tweet"></label>
+                                    <input
+                                        placeholder="ReTweet"
+                                        type="text"
+                                        className="validate"
+                                        id="retweet"
+                                        value={this.props.input}
+                                        name="input"
+                                        onChange={this.props.handleInputChange} />
+                                    <input
+                                        placeholder="Interval"
+                                        type="text"
+                                        className="validate"
+                                        id="rt-interval"
+                                        value={this.props.interval}
+                                        name="interval"
+                                        onChange={this.props.handleInputChange} />
                                 </div>
                                 <div className="card-action">
-                                <a onClick={this.reTweetHandler} href="">Send Command</a>
+                                <a onClick={this.props.reTweetHandler} href="">Send Command</a>
                                     {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
@@ -96,15 +117,16 @@ class CreateCommands extends Component {
                                 <div className="card-content white-text">
                                     <span className="card-title">Fave Tweet</span>
                                     <p>Put Instructions here on how to use command</p>
-                                    <input placeholder="Fave Tweet" type="text" className="validate" />
+                                    <input placeholder="Fave Tweet" type="text" value={this.props.input} className="validate" name="input" onChange={this.props.handleInputChange} />
                                     <label htmlFor="fave-tweet"></label>
 
                                 </div>
                                 <div className="card-action">
-                                <a onClick={this.faveTweetHandler} href="">Send Command</a>
+                                <a onClick={this.faveTweetHandler}>Send Command</a>
                                     {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

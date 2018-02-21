@@ -9,9 +9,12 @@ export default {
         return axios.post("/api/user", userData);
     },
 
-    get: () => {
-        return axios.get()
+
+    getTweets: (id) => {
+        return axios.post("/api/getTweets", id);
+
     },
+
     postTweet: () => {
         return axios.get()
     },
@@ -24,7 +27,7 @@ export default {
         return axios.get()
     },
 
-    reTweet: () => {
-        return axios.get()
+    reTweet: (tweetData) => {
+        return axios.post("/api/twitter", tweetData);
     }
 }
