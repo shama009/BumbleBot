@@ -1,14 +1,12 @@
 .card-content {
-    background-color: rgb(31, 28, 28);
+    background-color: rgb(234, 233, 107);
 }
 
 blockquote {
-    border-color: rgb(255, 215, 1);
+    border-color: black;
 }
 
 #tweets {
-    margin-top: 100px;
+    margin-top: 50px;
     background-color: black;
-    margin-right: 30px;
-
 }

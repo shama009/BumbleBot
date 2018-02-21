@@ -30,6 +30,7 @@ module.exports = class liri {
 
     // posts to twitter
     post(status, callback) {
+        console.log("Post: " + status);
         this.client.post("statuses/update", {
             status: status
         }, function (error, tweet, response) {
@@ -60,7 +61,7 @@ module.exports = class liri {
 
             // for (let i = 0; i < tweets; i++) {
 
-            console.log(tweets);
+            // console.log(tweets);
             // let response = {
             //     screen_name: this.screenName,
             //     text: tweets.statuses[i].text
@@ -82,7 +83,7 @@ module.exports = class liri {
                 }
 
                 console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
-                console.log(tweets);
+                // console.log(tweets);
                 
                 let data = {
                     tweets: tweets.statuses
@@ -182,8 +183,7 @@ module.exports = class liri {
 
     }
 
-    fav(search, callback) {
-
+    fav(search) {
 
         this.client.get("search/tweets", {
             q: search,
@@ -214,7 +214,7 @@ module.exports = class liri {
 
                             // console.log(response);
 
-                            callback(response);
+                            // callback(response);
                         }
                     })
 
