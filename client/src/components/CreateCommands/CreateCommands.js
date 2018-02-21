@@ -6,10 +6,6 @@ import "./CreateCommands.css"
 
 class CreateCommands extends Component {
 
-    state = {
-        input: ""
-    };
-
     postTweetHandler(e) {
         e.preventDefault();
         console.log("post tweet")
@@ -29,11 +25,10 @@ class CreateCommands extends Component {
         // API.faveTweet
     }
 
-    reTweetHandler(e) {
-        e.preventDefault();
-        console.log("re tweet")
-        // API.reTweet
-    }
+    // reTweetHandler(e) {
+    //     e.preventDefault();
+    //     console.log(this.props);
+    // }
 
     render() {
 
@@ -82,11 +77,25 @@ class CreateCommands extends Component {
                                 <div className="card-content white-text">
                                     <span className="card-title">ReTweet</span>
                                     <p>Put Instructions here on how to use command</p>
-                                    <input placeholder="ReTweet" type="text" className="validate" />
-                                    <label htmlFor="re-tweet"></label>
+                                    <input
+                                        placeholder="ReTweet"
+                                        type="text"
+                                        className="validate"
+                                        id="retweet"
+                                        value={this.props.input}
+                                        name="input"
+                                        onChange={this.props.handleInputChange} />
+                                    <input
+                                        placeholder="Interval"
+                                        type="text"
+                                        className="validate"
+                                        id="rt-interval"
+                                        value={this.props.interval}
+                                        name="interval"
+                                        onChange={this.props.handleInputChange} />
                                 </div>
                                 <div className="card-action">
-                                <a onClick={this.reTweetHandler} href="">Send Command</a>
+                                <a onClick={this.props.reTweetHandler} href="">Send Command</a>
                                     {/* <a href="">This is a link</a> */}
                                 </div>
                             </div>

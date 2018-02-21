@@ -48,8 +48,6 @@ module.exports = function (app, db, passport) {
         })
         .then(data => {
 
-            // console.log("data" + data);
-
             let client = new Liri(
                 configAuth.twitterAuth.consumerKey,
                 configAuth.twitterAuth.consumerSecret,
@@ -57,7 +55,7 @@ module.exports = function (app, db, passport) {
                 data.twitter.tokenSecret,
                 data.twitter.username
             );
-            console.log(data.twitter.username);
+
             client.init();
             client.get(null, tweets => {
                 res.json(tweets);
@@ -74,7 +72,7 @@ module.exports = function (app, db, passport) {
             })
             .then(data => {
 
-                // console.log("data" + data);
+                console.log("data: " + data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -111,6 +109,17 @@ module.exports = function (app, db, passport) {
                     case "follow-listen":
                         client.followListen(message => console.log(message));
                         res.send("Listening for follows");
+                        break;
+
+                    case "retweet":
+                    console.log("hit");
+                    console.log(req.body);
+                        if(req.body.interval) {
+                            setInterval(() => client.retweet(req.body.input), req.body.interval);
+                        }
+                        else {
+                            client.retweet(req.body.input);
+                        }
                         break;
 
                     default:

@@ -92,31 +92,37 @@ module.exports = class liri {
 
     // retweet tweets by search
     retweet(search) {
-
+        console.log(search);
         this.client.get('search/tweets', {
-            q: search
-        }, function (error, tweets, response) {
+            q: search,
+            count: 1
+        }, (error, tweets, response) => {
 
-            // console.log(tweets);
+            console.log(tweets);
 
-            for (let i = 0; i < 1; i++) {
+            // for (let i = 0; i < 1; i++) {
 
-                console.log("TWEET " + i + ": " + tweets.statuses[i].text);
-                console.log("TWEET ID " + i + ": " + tweets.statuses[i].id);
+                // console.log("TWEET " + i + ": " + tweets.statuses[i].text);
+                // console.log("TWEET ID " + i + ": " + tweets.statuses[i].id);
 
 
-
-                var tweetId = tweets.statuses[i].id_str;
-
-                liri.twitter.client.post("statuses/retweet/" + tweetId, function (error, tweet, response) {
-                    if (!error) {
-                        console.log("Tweeted: " + tweet.text);
-
-                    } else {
-                        console.log(error)
-                    }
-                });
+            if(tweets.statuses.length > 0) {
+                var tweetId = tweets.statuses[0].id_str;
+                
+                    this.client.post("statuses/retweet/" + tweetId, function (error, tweet, response) {
+                        if (!error) {
+                            console.log("Tweeted: " + tweet.text);
+    
+                        } else {
+                            console.log(error)
+                        }
+                    });
             }
+            else {
+                return;
+            }
+                
+            // }
         });
     }
 

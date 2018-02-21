@@ -25,7 +25,7 @@ export default {
         return axios.get()
     },
 
-    reTweet: () => {
-        return axios.get()
+    reTweet: (tweetData) => {
+        return axios.post("/api/twitter", tweetData);
     }
 }
