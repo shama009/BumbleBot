@@ -69,7 +69,7 @@ class CreateCommands extends Component {
                             <div id="post-tweet" className="card blue-grey darken-1">
                                 <div className="card-content">
                                     <span className="card-title">Post Tweet</span>
-                                    <p>Put Instructions here on how to use command</p>
+                                    <p>What you would you like to post?</p>
                                     <input 
                                         placeholder="Tweet Here"
                                         id="first_name"
@@ -93,7 +93,7 @@ class CreateCommands extends Component {
                             <div id="re-tweet" className="card blue-grey darken-1">
                                 <div className="card-content">
                                     <span className="card-title">ReTweet</span>
-                                    <p>Put Instructions here on how to use command</p>
+                                    <p>Enter what you would like to retweet and at which interval?</p>
                                     <input
                                         placeholder="ReTweet"
                                         type="text"
@@ -121,7 +121,7 @@ class CreateCommands extends Component {
                             <div id="fave-tweet" className="card blue-grey darken-1">
                                 <div className="card-content">
                                     <span className="card-title">Fav Tweet</span>
-                                    <p>Put Instructions here on how to use command</p>
+                                    <p>Enter what you would like to fav and at which interval</p>
                                     <input
                                     placeholder="Fav Tweet"
                                     type="text"

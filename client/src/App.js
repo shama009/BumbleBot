@@ -42,6 +42,10 @@ class App extends Component {
       interval: math
     }).then(res => {
       console.log(res);
+      this.setState({
+        rtInput: "",
+        rtInterval: ""
+      })
     })
   };
 
@@ -58,6 +62,10 @@ class App extends Component {
     console.log(data);
     API.favTweet(data).then(res => {
         console.log(res);
+        this.setState({
+          favInput: "",
+          favInterval: ""
+        })
     });
   };
 
@@ -72,6 +80,9 @@ class App extends Component {
     console.log(data);
     API.postTweet(data).then(res => {
       console.log(res);
+      this.setState({
+        postInput: ""
+      })
     });
   };
   
