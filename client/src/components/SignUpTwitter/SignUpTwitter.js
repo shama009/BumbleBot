@@ -5,7 +5,6 @@ import API from "../../utils/API";
 class SignUpTwitter extends Component {
 
   render() {
-  console.log(/*"Props from register: " + */ this.props);
     return (
       <div className="container">
         <div className="row">
