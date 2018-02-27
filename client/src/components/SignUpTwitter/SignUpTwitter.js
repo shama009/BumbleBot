@@ -17,9 +17,7 @@ class SignUpTwitter extends Component {
               <a
                   className="waves-effect waves-light btn"
                   id="twitterBtn"
-                  href="http://localhost:3001/auth/twitter"
-                  // onClick={this.test()}
-                  target="_blank">
+                  href="http://localhost:3001/auth/twitter">
                   <i className="fab fa-twitter"></i> Sign up with Twitter</a>
               </div>
             </div>

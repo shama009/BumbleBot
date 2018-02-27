@@ -3,14 +3,7 @@ var mongoose = require('mongoose');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    // username         : {
-    //     type: String,
-    //     unique: true
 
-    // },
-    // password         : {
-    //     type: String
-    // },
     twitter          : {
         id           : String,
         token        : String,
@@ -18,7 +11,6 @@ var userSchema = mongoose.Schema({
         displayName  : String,
         username     : String
     }
-
 });
 
 // create the model for users and expose it to our app
