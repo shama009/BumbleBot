@@ -61,7 +61,7 @@ module.exports = class liri {
 
             // for (let i = 0; i < tweets; i++) {
 
-            console.log(tweets);
+            // console.log(tweets);
             // let response = {
             //     screen_name: this.screenName,
             //     text: tweets.statuses[i].text
@@ -83,7 +83,7 @@ module.exports = class liri {
                 }
 
                 console.log("MY TWEET HISTORY (NEWEST TO OLDEST)");
-                console.log(tweets);
+                // console.log(tweets);
                 
                 let data = {
                     tweets: tweets.statuses

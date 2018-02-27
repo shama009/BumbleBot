@@ -42,7 +42,7 @@ module.exports = function (app, db, passport) {
     //====================================================
 
     app.post("/api/getTweets", (req, res) => {
-        console.log(req.body.id);
+        console.log("test: " + req.body.id);
         db.User.findOne({
             "twitter.id": req.body.id
         })
