@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-// import "./Navbar.css";
+import "./Navbar.css";
 // import API from "../../utils/API";
+import logo from "../../images/logo.svg"
 
 class Navbar extends Component {
 
@@ -13,7 +14,8 @@ class Navbar extends Component {
         return (
             <nav>
                 <div className="nav-wrapper">
-                    <a href="/home" className="brand-logo"><i className="material-icons">cloud</i>BumbleBot</a>
+                    <a href="/home" className="brand-logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BumbleBot</a>
+                    <img alt="logo" src={logo}/>
                     <a href="" data-activates="mobile" className="button-collapse"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
                         {/* <li><a

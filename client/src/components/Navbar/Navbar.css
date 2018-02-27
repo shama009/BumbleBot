@@ -1,3 +1,9 @@
 .nav-wrapper {
     background-color: rgb(31, 28, 28);
 }
+
+img {
+    border: 0;
+    width: 75px;
+    height: 64px;
+}

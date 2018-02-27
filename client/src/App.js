@@ -16,8 +16,11 @@ class App extends Component {
     password: "",
     passwordReEnter: "",
     valid: false,
-    input: "",
-    interval: ""
+    rtInput: "",
+    rtInterval: "",
+    favInput: "",
+    favInterval: "",
+    postInput: ""
   }
 
   handleInputChange = event => {
@@ -26,25 +29,74 @@ class App extends Component {
       [name]: value
     });
     localStorage.setItem(name, value);
-    console.log(this.state);
   };
 
   reTweetHandler = event => {
     event.preventDefault();
-    console.log(this.state.input);
-    console.log(this.state.interval);
-    const math = this.state.interval * 1000;
+    const math = this.state.rtInterval * 1000;
     console.log(math);
     API.reTweet({
       method: "retweet",
       id: localStorage.getItem("id"),
-      input: this.state.input,
+      input: this.state.rtInput,
       interval: math
     }).then(res => {
       console.log(res);
+      this.setState({
+        rtInput: "",
+        rtInterval: ""
+      })
     })
   };
 
+  favTweetHandler = (e) => {
+    console.log("Fav Button hit");
+    e.preventDefault();
+    const math = this.state.favInterval * 1000;
+    let data = {
+        method: "fav",
+        id: localStorage.getItem("id"),
+        input: this.state.favInput,
+        interval: math
+    };
+    console.log(data);
+    API.favTweet(data).then(res => {
+        console.log(res);
+        this.setState({
+          favInput: "",
+          favInterval: ""
+        })
+    });
+  };
+
+  postTweetHandler = e => {
+    e.preventDefault();
+    console.log("post tweet")
+    let data = {
+      method: "post",
+      id: localStorage.getItem("id"),
+      input: this.state.postInput
+    };
+    console.log(data);
+    API.postTweet(data).then(res => {
+      console.log(res);
+      this.setState({
+        postInput: ""
+      })
+    });
+  };
+  
+  followTweetHandler = e => {
+    e.preventDefault();
+    console.log("follow tweet");
+    let data = {
+      method: "follow-listen",
+      id: localStorage.getItem("id")
+    };
+    API.followTweet(data).then(res => {
+      console.log(res);
+    })
+  }
 //   handleFormSubmit = event => {
 //     event.preventDefault();
 //     console.log("Username: " + this.state.username + "\nPassword: " + this.state.password);
@@ -133,7 +185,17 @@ class App extends Component {
           } 
           return (<Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit} valid={this.state.valid} />)
           }} /> */}       
-        <Route exact path="/create" render={() => <CreateCommands reTweetHandler={this.reTweetHandler} input={this.state.input} interval={this.state.interval} handleInputChange={this.handleInputChange}/>} />
+        <Route exact path="/create" render={() => <CreateCommands 
+                                                        favTweetHandler={this.favTweetHandler} 
+                                                        reTweetHandler={this.reTweetHandler}
+                                                        postTweetHandler={this.postTweetHandler}
+                                                        followTweetHandler={this.followTweetHandler}
+                                                        rtInput={this.state.rtInput} 
+                                                        rtInterval={this.state.rtInterval}
+                                                        favInput={this.state.favInput}
+                                                        favInterval={this.state.favInterval}
+                                                        postInput={this.state.postInput}
+                                                        handleInputChange={this.handleInputChange}/>} />
       </div>
     </Router>
     );

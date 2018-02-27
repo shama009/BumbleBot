@@ -5,7 +5,6 @@ import "./SignUpTwitter.css";
 class SignUpTwitter extends Component {
 
   render() {
-  console.log(/*"Props from register: " + */ this.props);
     return (
       <div className="container">
         <div className="row">
