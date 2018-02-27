@@ -9,6 +9,7 @@ class Tweets extends Component {
     };
     
     componentDidMount() {
+        
         let data = {
             id: localStorage.getItem("id")
         };
