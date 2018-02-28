@@ -16,3 +16,11 @@ btn, .btn-large {
 body {
     background-image: url("../../images/bee.svg");
 }
+
+#tweets {
+    height: 650px;
+    overflow-y: auto;
+}
+.page-footer {
+    background: black;
+}

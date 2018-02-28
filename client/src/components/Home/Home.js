@@ -36,6 +36,11 @@ class Home extends Component {
                         <CommandsList />
                 </div>
             </div>
+            <footer class="page-footer">
+            <div class="container">
+            © 2018 BumbleBot
+            </div>
+        </footer>
         </div>
     )
   }
