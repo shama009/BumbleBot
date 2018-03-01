@@ -32,15 +32,24 @@ class CommandsList extends Component {
 
 
     render = () => {
-        let panel = "";
-        
-        for (let i = 0; i <this.state.commands.length; i++) {
+        let panel = [];
+        for (let i = 0; i < this.state.commands.length; i++) {
             let target = this.state.commands[i];
-            console.log(typeof target.id);
-            let text = target.id + target.data.method;
-            panel += text;
+            console.log("typeof" + typeof target.id);
+            let text = target.data.method;
+            panel.push( <li className="collection-item">
+            <div>{text}<a href="" className="secondary-content"><i
+                onClick={this.deleteCommandHandler} className="material-icons">send</i></a></div>
+            </li>);
         }
-        return panel;
+        return (
+            <div id="commands-list" className="col s12 m5">
+                <ul className="collection with-header">
+                    <li className="collection-header"><h5>Current Commands <a className="btn btn-floating btn-large pulse">{this.state.commands.length}</a></h5></li>
+                   {panel}
+                </ul>
+            </div>
+        );
     }
 }
 export default CommandsList;
