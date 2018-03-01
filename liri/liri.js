@@ -52,8 +52,8 @@ module.exports = class liri {
 
         this.client.get('search/tweets', {
             q: "cats",
-            result_type: "recent"
-            // result_type: "recent"
+            result_type: "recent",
+            count: 1
         }, (err, tweets, response) => {
 
             console.log("TWEET HISTORY (NEWEST TO OLDEST)");
@@ -69,7 +69,7 @@ module.exports = class liri {
 
             // console.log(response);
 
-            callback(tweets);
+            callback(tweets.statuses);
             // }
         });
       
