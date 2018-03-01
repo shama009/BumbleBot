@@ -41,6 +41,14 @@ module.exports = function (app, db, passport) {
     // temporary routes ===============================================================
     //====================================================
 
+    app.post("/api/commands", (req, res) => {
+        db.Command.find({
+            "user_id": req.body.id
+        })
+        .then(commands => console.log(commands))
+        .catch(err => console.log(err));
+    });
+
     app.post("/api/getTweets", (req, res) => {
         console.log("test: " + req.body.id);
         db.User.findOne({

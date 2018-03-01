@@ -48,7 +48,7 @@ module.exports = class Bumbler {
         const command = new Command();
 
         command.id = this.id;
-        command.user_id = this.id;
+        command.user_id = this.user_id;
         command.data.method = this.data.method;
         command.data.input = this.data.input;
         command.data.interval = this.data.interval;
@@ -56,13 +56,3 @@ module.exports = class Bumbler {
         command.save(err => err ? console.log(err) : console.log(command));
     }
 }
-
-// const command = new Command();
-
-// command.id = Date.now();
-// command.user_id = data.twitter.id;
-// command.data.method = req.body.method;
-// command.data.input = req.body.input;
-// command.data.interval = req.body.interval;
-
-// command.save(err => err ? console.log(err) : console.log(command));

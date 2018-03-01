@@ -14,6 +14,9 @@ export default {
         return axios.post("/api/getTweets", id);
 
     },
+
+    getCommands: id => axios.post("/api/commands", id),
+
     test: () => {
         axios.get("/auth/twitter");
     },
