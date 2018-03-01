@@ -13,11 +13,11 @@ class CommandsList extends Component {
         if (!localStorage.getItem("id")) {
             window.location.reload();
         }
-        console.log(this.props);
-        API.getCommands(this.props.id)
+        console.log(localStorage.getItem("id"));
+        API.getCommands({id: localStorage.getItem("id")})
         .then(commands => {
             console.log(commands);
-            let command = commands.
+            let command = commands.data;
             this.setState({
                 commands: command
             });
@@ -36,7 +36,9 @@ class CommandsList extends Component {
         
         for (let i = 0; i <this.state.commands.length; i++) {
             let target = this.state.commands[i];
-            panel += <div>{target}</div>
+            console.log(typeof target.id);
+            let text = target.id + target.data.method;
+            panel += text;
         }
         return panel;
     }

@@ -42,10 +42,11 @@ module.exports = function (app, db, passport) {
     //====================================================
 
     app.post("/api/commands", (req, res) => {
+        console.log(req.body);
         db.Command.find({
             "user_id": req.body.id
         })
-        .then(commands => console.log(commands))
+        .then(commands => res.send(commands))
         .catch(err => console.log(err));
     });
 
