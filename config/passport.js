@@ -38,8 +38,6 @@ module.exports = function(passport) {
 
     },
     (req, token, tokenSecret, profile, done) =>{
-        console.log(profile);
-        // console.log(token, tokenSecret);
         // asynchronous
         process.nextTick(function() {
             
@@ -51,7 +49,6 @@ module.exports = function(passport) {
                         return done(err);
 
                     if (user) {
-                        console.log("test0");
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.twitter.token) {
                             user.twitter.token       = token;
@@ -69,7 +66,6 @@ module.exports = function(passport) {
 
                         return done(null, user); // user found, return that user
                     } else {
-                        console.log("test1");
                         // if there is no user, create them
                         const newUser               = new User();
 
@@ -78,7 +74,6 @@ module.exports = function(passport) {
                         newUser.twitter.tokenSecret = tokenSecret;
                         newUser.twitter.username    = profile.username;
                         newUser.twitter.displayName = profile.displayName;
-                        console.log(newUser);
                         newUser.save((err) =>{
                             if (err)
                             console.log(err);
@@ -99,7 +94,6 @@ module.exports = function(passport) {
                 user.twitter.tokenSecret = tokenSecret;
                 user.twitter.username    = profile.username;
                 user.twitter.displayName = profile.displayName;
-                console.log("test2");
 
                 user.save((err)=> {
                     if (err)

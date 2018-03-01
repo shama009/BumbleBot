@@ -15,6 +15,12 @@ export default {
 
     },
 
+    getCommands: id => axios.post("/api/commands", id),
+
+    test: () => {
+        axios.get("/auth/twitter");
+    },
+
     postTweet: (tweetData) => {
         console.log("Post Utils route hit");
         console.log(tweetData);

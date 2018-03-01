@@ -1,5 +1,5 @@
 // import { read } from "fs";
-
+const Bumbler = require("../liri/commands");
 const Liri = require("../liri/liri");
 const configAuth = require('../config/auth');
 const path = require("path");
@@ -41,38 +41,21 @@ module.exports = function (app, db, passport) {
     // temporary routes ===============================================================
     //====================================================
 
-    app.post("/api/getTweets", (req, res) => {
-        console.log("test: " + req.body.id);
-        db.User.findOne({
-            "twitter.id": req.body.id
+    app.post("/api/commands", (req, res) => {
+        console.log(req.body);
+        db.Command.find({
+            "user_id": req.body.id
         })
-        .then(data => {
-
-            let client = new Liri(
-                configAuth.twitterAuth.consumerKey,
-                configAuth.twitterAuth.consumerSecret,
-                data.twitter.token,
-                data.twitter.tokenSecret,
-                data.twitter.username
-            );
-
-            client.init();
-            client.get(null, tweets => {
-                res.json(tweets);
-            });
-        }).catch(err => {   
-            console.log(err);
-        })
+        .then(commands => res.send(commands))
+        .catch(err => console.log(err));
     });
 
-    app.post("/api/twitter", (req, res) => {
-        console.log(`endpoint hit`);
+    app.post("/api/getTweets", (req, res) => {
+        console.log("test: " + req.body.id);
         db.User.findOne({
                 "twitter.id": req.body.id
             })
             .then(data => {
-
-                console.log("data: " + data);
 
                 let client = new Liri(
                     configAuth.twitterAuth.consumerKey,
@@ -83,75 +66,57 @@ module.exports = function (app, db, passport) {
                 );
 
                 client.init();
-
-                console.log(req.body);
-
-                switch (req.body.method) {
-
-                    case "get":
-                        if(req.body.interval) {
-                            setInterval(() => client.get(req.body.input), req.body.interval);
-                        }
-                        else {
-                            client.get(req.body.input);
-                        }
-
-                        break;
-                        
-
-                    case "post":
-                    console.log("Post api/twitter hit");
-                        client.post(req.body.input, data => console.log(data));
-                        break;
-
-                    case "fav":
-                    console.log("api/twitter hit");
-                        if(req.body.interval) {
-                            setInterval(() => client.fav(req.body.input, info => console.log(client.access_token_key, info)), req.body.interval);
-                        }
-                        else {
-                            client.fav(req.body.input);
-                        }
-                        break;
-
-                    case "stream":
-
-                        client.stream(req.body.input, info => console.log(info));
-                        break;
-
-                    case "follow-listen":
-                        client.followListen(message => console.log(message));
-                        // res.send("Listening for follows");
-                        break;
-
-                    case "retweet":
-                    console.log("hit");
-                    console.log(req.body);
-                        if(req.body.interval) {
-                            setInterval(() => client.retweet(req.body.input), req.body.interval);
-                        }
-                        else {
-                            client.retweet(req.body.input);
-                        }
-                        break;
-
-                    default:
-                        res.send("err no method match");
-                        break;
-                }
-
-                let correctedInt = req.body.interval / 10;
-                res.json({
-                    message: `Method ${req.body.method} with Input ${input} set to repeat every ${correctedInt} seconds.`
+                client.get(null, tweets => {
+                    res.json(tweets);
                 });
-
-                // res.json(client);
+            }).catch(err => {
+                console.log(err);
             })
-            .catch(err => res.json(err));
+    });
+
+    app.post("/api/twitter", (req, res) => {
+        console.log(`endpoint hit`);
+        if (req.body.method === "stop") {
+            let commandId = req.body.input;
+            this[commandId].handler({
+                active: false
+            });
+            console.log(this[commandId])
+            return
+        } else {
+            db.User.findOne({
+                    "twitter.id": req.body.id
+                })
+                .then(data => {
+
+                    console.log("data: " + data);
+
+                    let client = new Liri(
+                        configAuth.twitterAuth.consumerKey,
+                        configAuth.twitterAuth.consumerSecret,
+                        data.twitter.token,
+                        data.twitter.tokenSecret,
+                        data.twitter.username
+                    );
+                    client.init();
+
+                    let id = Date.now();
+                    this[id] = new Bumbler(id, data.twitter.id, req.body.method, req.body.input, req.body.interval);
+
+                    this[id].store();
+                    this[id].initialize(client);
+                    this[id].handler({
+                        active: true
+                    });
+
+                    res.json(this[id].id);
+
+                })
+                .catch(err => console.log(err));
+        }
     });
 
     // // passport twitter --------------------------------
-    // app.get("/test", (req, res) => )
     // send to twitter to do the authentication
     app.get('/auth/twitter', passport.authenticate('twitter'));
 
@@ -159,7 +124,11 @@ module.exports = function (app, db, passport) {
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
             if (!user) {
+<<<<<<< HEAD
                 res.redirect("http://localhost:3001/auth/twitter");
+=======
+                res.redirect("/auth/twitter");
+>>>>>>> 34c10d15d1f287c65f109a50acce4e2dd659c849
             } else {
                 console.log(user);
                 res.cookie("user", JSON.stringify(user));
@@ -167,13 +136,6 @@ module.exports = function (app, db, passport) {
             }
         })(req, res, next)
     });
-
-    app.get("/test", (req, res) => {
-        res.json({
-            message: "test"
-        });
-    });
-
 }
 
 

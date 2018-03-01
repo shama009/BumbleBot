@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./SignUpTwitter.css";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 
 class SignUpTwitter extends Component {
 
@@ -17,8 +17,7 @@ class SignUpTwitter extends Component {
               <a
                   className="waves-effect waves-light btn"
                   id="twitterBtn"
-                  href="http://localhost:3001/auth/twitter"
-                  target="_blank">
+                  href="http://localhost:3001/auth/twitter">
                   <i className="fab fa-twitter"></i> Sign up with Twitter</a>
               </div>
             </div>

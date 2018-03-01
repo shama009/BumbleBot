@@ -27,6 +27,8 @@ class Tweets extends Component {
                         </div>
                     </div>
                 );
+                console.log(tweets);
+                return tweet
             });
             this.setState({
                 tweets: text
