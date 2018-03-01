@@ -124,11 +124,7 @@ module.exports = function (app, db, passport) {
     app.get('/auth/twitter/callback', (req, res, next) => {
         passport.authenticate('twitter', (err, user, info) => {
             if (!user) {
-<<<<<<< HEAD
-                res.redirect("http://localhost:3001/auth/twitter");
-=======
                 res.redirect("/auth/twitter");
->>>>>>> 34c10d15d1f287c65f109a50acce4e2dd659c849
             } else {
                 console.log(user);
                 res.cookie("user", JSON.stringify(user));
