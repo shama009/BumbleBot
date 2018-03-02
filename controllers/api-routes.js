@@ -81,7 +81,7 @@ module.exports = function (app, db, passport) {
             this[commandId].handler({
                 active: false
             });
-            console.log(this[commandId])
+            console.log("shama "+this[commandId])
             return
         } else {
             db.User.findOne({

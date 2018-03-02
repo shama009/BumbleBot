@@ -40,4 +40,5 @@ export default {
     reTweet: (tweetData) => {
         return axios.post("/api/twitter", tweetData);
     }
+    
 }
