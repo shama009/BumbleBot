@@ -76,8 +76,10 @@ module.exports = function (app, db, passport) {
 
     app.post("/api/twitter", (req, res) => {
         console.log(`endpoint hit`);
+        console.log(req.body);
         if (req.body.method === "stop") {
             let commandId = req.body.input;
+            console.log(commandId);
             this[commandId].handler({
                 active: false
             });

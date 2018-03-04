@@ -17,8 +17,8 @@ export default {
 
     getCommands: id => axios.post("/api/commands", id),
 
-    test: () => {
-        axios.get("/auth/twitter");
+    commandToggle: data => {
+        axios.post("/api/twitter", data);
     },
 
     postTweet: (tweetData) => {
