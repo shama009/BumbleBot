@@ -11,6 +11,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 
 }
+
 module.exports = function (app, db, passport) {
 
     // user registration route
@@ -128,7 +129,7 @@ module.exports = function (app, db, passport) {
             } else {
                 console.log(user);
                 res.cookie("user", JSON.stringify(user));
-                res.redirect("http://localhost:3000/home");
+                res.redirect("https://http://bumble-bot.herokuapp.com/home");
             }
         })(req, res, next)
     });
