@@ -130,7 +130,8 @@ module.exports = function (app, db, passport) {
                 console.log(user);
                 res.cookie("user", JSON.stringify(user));
                 res.redirect("https://bumble-bot.herokuapp.com/home");
-//                 res.redirect("http://localhost:3000/home");
+                // res.redirect("http://localhost:3000/home");
+
             }
         })(req, res, next)
     });
