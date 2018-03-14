@@ -14,9 +14,20 @@ class Home extends Component {
     };
 
     componentDidMount = () => {
-        console.log(document.cookie, typeof document.cookie);
-        const cookiesParsed = decodeURIComponent(document.cookie);
-        const user = cookiesParsed.slice(5);
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        const userCookie = readCookie("user");
+        console.log(userCookie);
+        const user = decodeURIComponent(userCookie);
+        // const user = cookiesParsed.slice(5);
         const final = JSON.parse(user);
         localStorage.setItem("id", final.twitter.id);
         this.setState({
