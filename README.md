@@ -1,3 +1,3 @@
 # BumbleBot
 Twitter Bot that controls a Twitter account via Twitter API. The bot software may autonomously perform actions such as tweeting, retweeting, liking, following or direct messaging other accounts.
-Here is the link to deployed app: [BumbleBot](https://bumble-bot.herokuapp.com/)
+<br />Here is the link to deployed app: [BumbleBot](https://bumble-bot.herokuapp.com/)
