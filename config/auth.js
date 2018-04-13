@@ -4,8 +4,6 @@
 module.exports = {
 
     'twitterAuth' : {
-        //'consumerKey'        : 'VDPgSyJ8vMjSn0PjAZBtQgdPO',
-        //'consumerSecret'     : '94h1wLHTXPIc3btcZQoBiofmzNbUs2nrUG9c3vUOPsTFcUv3BC',
         'callbackURL'        : 'https://bumble-bot.herokuapp.com/auth/twitter/callback',
          'consumerKey'        : process.env.consumerKey,
          'consumerSecret'     : process.env.consumerSecret
