@@ -17,7 +17,7 @@ class SignUpTwitter extends Component {
               <a
                   className="waves-effect waves-light btn"
                   id="twitterBtn"
-                  href="http://localhost:3001/auth/twitter">
+                  href="https://bumble-bot.herokuapp.com/auth/twitter">
                   <i className="fab fa-twitter"></i> Sign up with Twitter</a>
               </div>
             </div>
