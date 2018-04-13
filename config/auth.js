@@ -10,6 +10,6 @@ module.exports = {
         //'callbackURL'        : 'http://127.0.0.1:3001/auth/twitter/callback'
          //'consumerKey'        : process.env.consumerKey,
         // 'consumerSecret'     : process.env.consumerSecret,
-         //'callbackURL'        : '/auth/twitter/callback'
+         //'callbackURL'        : '/auth/twitter/callback'4
     }
 };
