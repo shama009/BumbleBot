@@ -8,7 +8,6 @@ export default {
     saveUser: (userData) => {
         return axios.post("/api/user", userData);
     },
-
     getTweets: (id) => {
         return axios.post("/api/getTweets", id);
 
