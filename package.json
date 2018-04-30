@@ -36,7 +36,6 @@
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
-    "react-cookie": "^2.1.2",
     "twitter": "^1.7.1"
   }
 }
