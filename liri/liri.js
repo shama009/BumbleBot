@@ -14,8 +14,6 @@ module.exports = class liri {
     }
 
     // twitter module
-
-
     init() {
         this.client = new Twitter({
             consumer_key: this.consumer_key,
@@ -145,7 +143,7 @@ module.exports = class liri {
 
     followListen(callback) {
         var stream = this.client.stream('user');
-        stream.on('follow', (event) => {
+        stream.on('follow', event => {
             var name = event.source.screen_name;
             if (name != this.screenName) {
                 callback(name + " followed!");

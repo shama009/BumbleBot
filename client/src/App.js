@@ -186,16 +186,16 @@ class App extends Component {
           return (<Login username={this.state.username} password={this.state.password} handleInputChange={this.handleInputChange} loginFormSubmit={this.loginFormSubmit} valid={this.state.valid} />)
           }} /> */}       
         <Route exact path="/create" render={() => <CreateCommands 
-                                                        favTweetHandler={this.favTweetHandler} 
-                                                        reTweetHandler={this.reTweetHandler}
-                                                        postTweetHandler={this.postTweetHandler}
-                                                        followTweetHandler={this.followTweetHandler}
-                                                        rtInput={this.state.rtInput} 
-                                                        rtInterval={this.state.rtInterval}
-                                                        favInput={this.state.favInput}
-                                                        favInterval={this.state.favInterval}
-                                                        postInput={this.state.postInput}
-                                                        handleInputChange={this.handleInputChange}/>} />
+          favTweetHandler={this.favTweetHandler} 
+          reTweetHandler={this.reTweetHandler}
+          postTweetHandler={this.postTweetHandler}
+          followTweetHandler={this.followTweetHandler}
+          rtInput={this.state.rtInput} 
+          rtInterval={this.state.rtInterval}
+          favInput={this.state.favInput}
+          favInterval={this.state.favInterval}
+          postInput={this.state.postInput}
+          handleInputChange={this.handleInputChange}/>} />
       </div>
     </Router>
     );

@@ -33,13 +33,15 @@ class Home extends Component {
 
         <div>
             <Navbar />
-            <div className="container">
-                <div className="row">
-                    <div id="tweets" className="col s12 m6">
-                        <Tweets />
+            <div className="content">
+                <div className="container">
+                    <div className="row">
+                        <div id="tweets" className="col s12 m6">
+                            <Tweets />
+                        </div>
+                        <div className="col s12 m1"></div>
+                            <CommandsList id={this.state.id}/>
                     </div>
-                    <div className="col s12 m1"></div>
-                        <CommandsList id={this.state.id}/>
                 </div>
             </div>
         </div>

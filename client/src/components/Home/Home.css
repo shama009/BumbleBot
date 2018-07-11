@@ -9,6 +9,12 @@ btn, .btn-large {
     cursor: pointer;
 }
 
+.content {
+    background: #ffffff7c;
+    margin: auto;
+    height: 100%;
+}
+
 .container {
     width: 80%;
 }

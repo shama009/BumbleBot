@@ -38,8 +38,11 @@ module.exports = class Bumbler {
                 }
                 break;
             case false:
-                clearInterval(this.worker);
+                if (this.worker._idleTimeout) {
+                    clearInterval(this.worker);
+                }
                 this.worker = "";
+                break;
         }
     }
 

@@ -67,6 +67,12 @@ module.exports = function (app, db, passport) {
 
                 client.init();
                 client.get(null, tweets => {
+                    // let response = "";
+                    // if (tweets.length === 0) {
+                    //     let response = {text: "no tweets yet!"}
+                    // } else {
+                    //     let response = tweets;
+                    // }
                     res.json(tweets);
                 });
             }).catch(err => {
@@ -85,6 +91,14 @@ module.exports = function (app, db, passport) {
             });
             console.log(this[commandId])
             return
+        } else if (req.body.method === "start") {
+            let commandId = req.body.input;
+            console.log(commandId);
+            this[commandId].handler({
+                active: true
+            });
+            console.log(this[commandId])
+            return 
         } else {
             db.User.findOne({
                     "twitter.id": req.body.id
@@ -102,6 +116,10 @@ module.exports = function (app, db, passport) {
                     );
                     client.init();
 
+                    if (req.body.method === "post") {
+                        
+                    }
+
                     let id = Date.now();
                     this[id] = new Bumbler(id, data.twitter.id, req.body.method, req.body.input, req.body.interval);
 
@@ -110,7 +128,6 @@ module.exports = function (app, db, passport) {
                     this[id].handler({
                         active: true
                     });
-
                     res.json(this[id].id);
 
                 })
